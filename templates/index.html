@@ -1,0 +1,227 @@
+<!--Thomas Rüegg-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Pappy John Commandes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <link rel="icon" href="/static/images/pappy_john.jpg">
+</head>
+    <body>
+    <img id="image1" src="https://www.aufildevosenvies.ch/storage/app/media/uploaded-files/Pappy%20John.png">
+        <ul id="navigation_bar">
+            <li>
+                <a onclick="showCmd()" id="cmd_active">Commande</a>
+            </li>
+            <li>
+                <a onclick="showFourn()" id="fourn_active">Fournisseur</a>
+            </li>
+            <li>
+                <a onclick="openModal()" id="new_cmd">Nouvelle commande</a>
+            </li>
+            <li>
+                <a onclick="sendToFlaskBackCMD()" id="back_cmd">Annuler la dernière suppression</a>
+            </li>
+            <li>
+                <a onclick="openModal2()" id="new_fourn">Nouveau fournisseur</a>
+            </li>
+            <li>
+                <a onclick="sendToFlaskBackFRN()" id="back_fourn">Annuler la dernière suppression</a>
+            </li>
+            <li>
+                <input type="text" id="searche" placeholder="Filtrer une commande">
+            </li>
+            <li>
+                <a id="btn_settings" onclick="openModalSettings()">&#x2699;</a>
+            </li>
+        </ul>
+        <div id="div_tbl_cmd">
+            <div class="title_table">
+                <h1><u>Commande</u></h1>
+                <form action="">
+                    <button class="btn_reload" formaction="{{ url_for('afficher_donnees') }}">&#x1F5D8</button>
+                </form>
+            </div>
+            <table id="table-cmd">
+                <tr>
+                    <th class="index0">No. Commande
+                        <a id="order" href="{{ url_for('afficher_donnees', order=next_order) }}">
+                            {% if order == 'ASC' %}&#8593;{% else %}&#8595;{% endif %}
+                        </a>
+                    </th>
+                    <th class="index1">Id commande</th>
+                    <th class="index2">Id fournisseur</th>
+                    <th class="index3">Id article</th>
+                    <th class="index4">Article</th>
+                    <th class="index5">Variante</th>
+                    <th class="index6">Quantité</th>
+                    <th class="index7">Commandé par</th>
+                    <th class="index8">Statut</th>
+                    <th class="index9">Commandé le</th>
+                    <th class="index10">Reçu le</th>
+                    <th class="index11">Remarques</th>
+                    <th class="index12">Fournisseur</th>
+                    <th class="index13">No. Article</th>
+                    <th class="index14">Modifier</th>
+                    <th class="index15">Supprimer</th>
+                </tr>
+                <tbody>
+                    {% for row in query_data %}
+                    <tr>
+                        {% for item in row %}
+                            <td class="index{{ loop.index0 }}">{{ item }}</td>
+                        {% endfor %}
+                        <form method="post">
+                            <td class="action_td">
+                                <button onclick="getUpdateID(event); openModal5()" class="action_btn">
+                                    <img src="/static/images/UPDATE.png" class="update_img">
+                                </button>
+                            </td>
+                        </form>
+                        <form method="post">
+                            <td class="action_td">
+                                <button onclick="getDeleteID(event)" class="action_btn">
+                                    <img src="/static/images/DELETE.jpg" class="delete_img">
+                                </button>
+                            </td>
+                        </form>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div id="result"></div>
+        </div>
+        <div id="div_tbl_fourn">
+            <div class="title_table">
+                <h1><u>Fournisseur</u></h1>
+                <form action="">
+                    <button class="btn_reload" formaction="{{ url_for('afficher_donnees') }}">&#x1F5D8</button>
+                </form>
+            </div>
+            <table id="tbl_fourn">
+                <tr class="tr_fourn">
+                    <th>Nom</th><th>Domaine de vente</th><th>No. téléphone</th><th>E-mail</th><th>Modifier</th><th>Supprimer</th>
+                </tr>
+                {% for row in fournisseur %}
+                    <tr class="tr_fourn">
+                        {% for item in row %}
+                            <td>{{ item }}</td>
+                        {% endfor %}
+                        <form method="post">
+                            <td class="action_td" class="td_fourn">
+                                <button onclick="getUpdateFourn(event); openModal6()" class="action_btn">
+                                    <img src="/static/images/UPDATE.png" class="update_img">
+                                </button>
+                            </td>
+                        </form>
+                        <form method="post">
+                            <td class="action_td" class="td_fourn">
+                                <button onclick="getDeleteFourn(event)" class="action_btn">
+                                    <img src="/static/images/DELETE.jpg" class="delete_img">
+                                </button>
+                            </td>
+                        </form>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <!-- Nouvelle commande popup -->
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal()">&#x1F5D9;</span>
+            <img class="image_popup" src="static/images/pappy_john.jpg">
+            <p>* obligatoir</p>
+            <h1><u>Nouvelle commande :</u></h1>
+            <form method="post" action="/insert_data">
+                <input type="number" name="no_commande" placeholder="No. Commande *" required>
+                <input type="text" name="article" placeholder="Article *" required>
+                <input type="text" name="variante" placeholder="Variante">
+                <input type="number" name="quantite" placeholder="Quantité *" required>
+                <input type="text" name="commande_par" placeholder="Commandé par *" required>
+                <input type="text" name="statut" placeholder="Statut *" required>
+                <p>Commandé le * :
+                    <input type="date" id="commande_le" name="commande_le" required>
+                </p>
+                <p>Reçu le :
+                    <input type="date" name="recu_le" id="recu_le">
+                </p>
+                <input type="text" name="remarque" placeholder="Remarque" maxlength="100">
+                <input type="text" name="no_article" placeholder="No. Article">
+                <p>Séléctionner un fournisseur * :
+                    <select id="choix" name="fournisseur" required>
+                        {% for row in fournisseur_data %}
+                            {% for item in row %}
+                                <option>{{ item }}</option>
+                            {% endfor %}
+                        {% endfor %}
+                    </select>
+                </p>
+                <input type="submit" value="Envoyer" onclick="controlDate()">
+            </form>
+          </div>
+        </div>
+        <!-- Nouveau fournisseur popup -->
+        <div id="myModal2" class="modal">
+          <div class="modal-content">
+              <span class="close" onclick="closeModal2()">&#x1F5D9;</span>
+              <img class="image_popup" src="static/images/pappy_john.jpg">
+              <p>* obligatoir</p>
+              <h1><u>Ajouter un fournisseur :</u></h1>
+              <form method="post" action="/insert_data_fournisseur">
+                  <input type="text" name="nom" placeholder="Nom du fournisseur *" required>
+                  <input type="text" name="domaine_vente" placeholder="Domaine de vente">
+                  <input type="text" name="tel" placeholder="No. Téléphone">
+                  <input type="email" name="email" placeholder="E-mail *" required>
+                  <input type="submit" placeholder="Envoyer">
+              </form>
+          </div>
+        </div>
+        <!--Modifier des commandes popup-->
+        <div id="myModal5" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal5()">&#x1F5D9;</span>
+                <img class="image_popup" src="static/images/pappy_john.jpg">
+                <p>* obligatoir</p>
+                <h1><u>Modifier une commande :</u></h1>
+                <form method="post" action="/modifier_commandes">
+                    <div id="update_div"></div>
+                    <p>Séléctionner un fournisseur * :
+                    <select name="fournisseur_name" id="fournisseur_name" required>
+                        {% for row in fournisseur_data %}
+                            {% for item in row %}
+                                <option name="modify_fourn">{{ item }}</option>
+                            {% endfor %}
+                        {% endfor %}
+                    </select>
+                </p>
+                    <br>
+                    <input type="button" value="Modifier" onclick="closeModal5SendData()">
+                </form>
+            </div>
+        </div>
+        <!-- Modifier les fournisseurs popup -->
+        <div id="myModal6" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal6()">&#x1F5D9;</span>
+                <img class="image_popup" src="static/images/pappy_john.jpg">
+                <p>* obligatoir</p>
+                <h1><u>Modifier un fournisseur :</u></h1>
+                <form method="post" action="/modifier_fournisseur">
+                    <div id="update_fourn_div"></div>
+                    <br>
+                    <input type="button" value="Modifier" onclick="closeModal6SendData()">
+                </form>
+            </div>
+        </div>
+        <!---Popup paramètres-->
+        <div id="modal_settings" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModalSettings()">&#x1F5D9;</span>
+                <img class="image_popup" src="static/images/pappy_john.jpg">
+                <h1><u>Paramètres :</u></h1>
+                <p>Table zèbrée :<button id="btn_modal_settings" class="btn_modal_settings" onclick="StripedTable()">Activer</button></p>
+            </div>
+        </div>
+        <script src="{{ url_for('static', filename='js/script.js')}}"></script>
+    </body>
+</html>

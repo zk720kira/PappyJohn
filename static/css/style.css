@@ -1,0 +1,224 @@
+/*Thomas Rüegg*/
+th, td {
+  border-bottom: 1px solid #949494;
+  text-align: center;
+  padding: 2px;
+}
+
+tr:nth-child(even) {
+  background-color: white;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+button, input[type=submit], input[type=button] {
+  color: #090909;
+  padding: 1% 1.5%;
+  font-size: 13px;
+  border-radius: 10px;
+  background: #e8e8e8;
+  cursor: pointer;
+  border: 1px solid #e8e8e8;
+  transition: all 0.3s;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+}
+
+button:active, input[type=submit]:active, input[type=button]:active {
+  color: #666;
+  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+}
+
+input[type=text], input[type=email], input[type=number] {
+    display:block;
+    width:100%;
+    margin:10px 0;
+    padding:10px;
+    border-radius:10px;
+    border: 1px solid #eee;
+    transition: .3s border-color;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+#image1 {
+  width: 20%;
+}
+
+.image_popup {
+  width: 3%;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 2.5%;
+  border: 1px solid #888;
+  width: 80%;
+  border-radius: 30px;
+}
+
+.close {
+  /*color: #aaa;*/
+  float: right;
+  color: black
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  cursor: pointer;
+}
+
+.action_btn {
+  color: black;
+  box-shadow: none;
+  background-color: white;
+  border-radius: 0%;
+  border: none;
+  padding: 0%;
+  margin: 0%;
+}
+
+.action_btn:active {
+  box-shadow: none;
+}
+
+.update_img {
+  width: 15%;
+}
+
+.delete_img {
+  width: 13%;
+}
+
+.action_td {
+  width: 8%;
+}
+
+#div_tbl_cmd {
+  display: inline;
+}
+
+#div_tbl_fourn {
+  display: none;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#cmd_active {
+  background-color: #F71F0A;
+}
+
+#fourn_active {
+  background-color: #111;
+}
+
+#order {
+  text-decoration: none;
+  color: black;
+}
+
+#new_cmd {
+  display: block;
+}
+
+#new_cmd:active {
+  background-color: #F71F0A;
+}
+
+#back_cmd {
+  display: block;
+}
+
+#back_cmd:active {
+  background-color: #F71F0A;
+}
+
+#new_fourn {
+  display: none;
+}
+
+#back_fourn {
+  display: none;
+}
+
+.title_table {
+  display: flex;
+  flex-direction: row;
+}
+
+.btn_reload {
+  padding: 30px 0px 0px 15px;
+  margin: 0;
+  background-color: white;
+  box-shadow: none;
+  border: none;
+  font-size: 20px;
+  border-radius: 0%;
+  color: black;
+}
+
+.btn_reload:active {
+  box-shadow: none;
+}
+
+/* Cacher la colonne des ID */
+.index1, .index2, .index3 {
+  display: none;
+}
+
+#btn_settings {
+  padding-bottom: 10px;
+  margin-left: 30px;
+  text-align: right;
+}
+
+.btn_modal_settings {
+  padding: 5px 5px 5px 5px;
+  margin: 0 0 0 10px;
+  box-shadow: none;
+  color: green;
+  position: fixed;
+}
+
+#searche {
+  padding: 2.5% 2.5% 2.5% 2.5%;
+  margin: 7% 0 0 0;
+}
+
+#navigation_bar {
+  display: flex;
+  flex-direction: row;
+}
