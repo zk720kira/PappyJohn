@@ -41,6 +41,19 @@ window.onload = function() {
     replaceEmptyCellulesCommandes(); // Appeler la fonction pour remplacer les cellules contenant "None" par "Pas de données"
     replaceEmptyCellulesFourn(); // Appler la fonction pour remplacer les cellules contenant "None" par "Pas de données"
     checkStripedTable();
+    showRow1();
+    showRow2();
+    showRow3();
+    showRow4();
+    showRow5();
+    showRow6();
+    showRow7();
+    showRow8();
+    showRow9();
+    showRow10();
+    showRow11();
+    showRow12();
+    showRow13();
 };
 
 // Ouvrir la fenêtre avec le formulaire pour les nouvelles commandes
@@ -191,6 +204,16 @@ function closeModalSettings() {
     document.getElementById("modal_settings").style.display = "none";
 }
 
+// Fonction pour ouvrir la fenêtre pour afficher/masquer les colonnes
+function openModalShow() {
+    document.getElementById("modal_show").style.display = "block";
+}
+
+// Fonction pour fermerla fenêtre pour afficher/masquer les colonnes
+function closeModalShow() {
+    document.getElementById("modal_show").style.display = "none";
+}
+
 // Autorisation des notifications
 /*Notification.requestPermission().then(function(permission) {
     if (permission === 'granted') {
@@ -202,48 +225,39 @@ function closeModalSettings() {
 // Récupérer le numéro de la commande pour la sélectionner et ensuite fair un UPDATE
 function getUpdateID(event) {
     event.preventDefault();
-    let id = event.target.closest('tr').querySelector('td:nth-child(2)').innerText;
+    let id_commande = event.target.closest('tr').querySelector('td:nth-child(2)').innerText;
     let id_fourn = event.target.closest('tr').querySelector('td:nth-child(3)').innerHTML;
     let id_article = event.target.closest('tr').querySelector('td:nth-child(4)').innerHTML;
-    let content = event.target.closest('tr').querySelector('td:first-child').innerText;
-    let article = event.target.closest('tr').querySelector('td:nth-child(5)').innerText;
-    let quantity = event.target.closest('tr').querySelector('td:nth-child(7)').innerText;
-    let command_by = event.target.closest('tr').querySelector('td:nth-child(8)').innerText;
     let fourn = event.target.closest('tr').querySelector('td:nth-child(13)').innerText;
     localStorage.setItem('fournisseur', fourn)
-    // console.log(id, id_fourn, id_article, content, article, quantity, command_by, fourn) // --> Pour du débug
-    sendDataToFlask(id, id_fourn, id_article, content, article, quantity, command_by, 'update');
+    // console.log(id_commande, id_fourn, id_article, fourn) // --> Pour du débug
+    sendDataToFlask(id_commande, id_fourn, id_article, 'update');
 }
 
 // Récupérer le numéro de commande pour la sélectionner et ensuite la supprimer
 function getDeleteID(event) {
     event.preventDefault();
-    let id = event.target.closest('tr').querySelector('td:nth-child(2)').innerText;
+    let id_commande = event.target.closest('tr').querySelector('td:nth-child(2)').innerText;
     let id_fourn = event.target.closest('tr').querySelector('td:nth-child(3)').innerHTML;
     let id_article = event.target.closest('tr').querySelector('td:nth-child(4)').innerHTML;
-    let content = event.target.closest('tr').querySelector('td:first-child').innerText;
-    let article = event.target.closest('tr').querySelector('td:nth-child(5)').innerText;
-    let quantity = event.target.closest('tr').querySelector('td:nth-child(7)').innerText;
-    let command_by = event.target.closest('tr').querySelector('td:nth-child(8)').innerText;
-    let fourn = event.target.closest('tr').querySelector('td:nth-child(13)').innerText;
-    // console.log(id, id_fourn, id_article, content, article, quantity, command_by, 'delete') // --> Pour du débug
+    // console.log(id_commande, id_fourn, id_article, 'delete') // --> Pour du débug
     // Demander à l'utilisateur s'il veut vraiment supprimer la commande
     if(confirm("La commande sélectionée sera supprimée, voulez-vous vraiment continuer ?") === true) {
-        sendDataToFlask(id, id_fourn, id_article, content, article, quantity, command_by, 'delete');
+        sendDataToFlask(id_commande, id_fourn, id_article, 'delete');
     }
     else {
-        // console.log("La suppression de la commande No." + content + " à été annulée !"); // --> Pour du débug
+        // console.log("La suppression de la commande à été annulée !"); // --> Pour du débug
     }
 }
 
 // Envoyer la requête au Flask et gérer le retour du Flask pour les commandes
-function sendDataToFlask(id, id_fourn, id_article, content, article, quantity, command_by, action) {
+function sendDataToFlask(id_commande, id_fourn, id_article, action) {
     fetch('/handle_action', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({id: id, id_fourn: id_fourn, id_article: id_article, content: content, article: article, quantity: quantity, command_by: command_by, action: action})
+        body: JSON.stringify({id_commande: id_commande, id_fourn: id_fourn, id_article: id_article, action: action})
     })
     .then(response => {
         if (response.ok) {
@@ -612,3 +626,213 @@ search_input.addEventListener("input", function() {
         }
     }
 });
+
+function showRow0() {
+  let input = document.getElementById("input0");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".index0");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".index0");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}
+
+function showRow1() {
+  let input = document.getElementById("input1");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".index1");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".index1");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}
+
+function showRow2() {
+  let input = document.getElementById("input2");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".index2");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".index2");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}
+
+function showRow3() {
+  let input = document.getElementById("input3");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".index3");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".index3");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}
+
+function showRow4() {
+  let input = document.getElementById("input4");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".index4");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".index4");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}
+
+function showRow5() {
+  let input = document.getElementById("input5");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".index5");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".index5");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}
+
+function showRow6() {
+  let input = document.getElementById("input6");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".index6");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".index6");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}
+
+function showRow7() {
+  let input = document.getElementById("input7");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".index7");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".index7");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}
+
+function showRow8() {
+  let input = document.getElementById("input8");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".index8");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".index8");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}
+
+function showRow9() {
+  let input = document.getElementById("input9");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".index9");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".index9");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}
+
+function showRow10() {
+  let input = document.getElementById("input10");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".index10");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".index10");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}
+
+function showRow11() {
+  let input = document.getElementById("input11");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".index11");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".index11");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}
+
+function showRow12() {
+  let input = document.getElementById("input12");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".index12");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".index12");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}
+
+function showRow13() {
+  let input = document.getElementById("input13");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".index13");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".index13");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}

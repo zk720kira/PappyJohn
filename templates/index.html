@@ -220,6 +220,80 @@
                 <img class="image_popup" src="static/images/pappy_john.jpg">
                 <h1><u>Paramètres :</u></h1>
                 <p>Table zèbrée :<button id="btn_modal_settings" class="btn_modal_settings" onclick="StripedTable()">Activer</button></p>
+                <p>Afficher/Masquer des colonnes :
+                    <button class="btn_modal_settings" id="btn_modal_settings_show" onclick="openModalShow()">Onglet Commande</button>
+                    <button class="btn_modal_settings" id="btn_modal_settings_show_fourn">Onglet Fournisseur</button>
+                </p>
+            </div>
+        </div>
+        <!-- Popup afficher/masquer les colonnes-->
+        <div id="modal_show" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModalShow()">&#x1F5D9;</span>
+                <div id="div_show_table">
+                    <div class="show_table">
+                        <div class="content_align">
+                            <p>No.Commande :</p>
+                            <input type="checkbox" class="input_show_table" checked id="input0" onclick="showRow0()">
+                        </div>
+                        <div class="content_align">
+                            <p>Id Commande :</p>
+                            <input type="checkbox" class="input_show_table" id="input1" onclick="showRow1()">
+                        </div>
+                        <div class="content_align">
+                            <p>Id Fournisseur :</p>
+                            <input type="checkbox" class="input_show_table" id="input2" onclick="showRow2()">
+                        </div>
+                        <div class="content_align">
+                            <p>Id Article :</p>
+                            <input type="checkbox" class="input_show_table" id="input3" onclick="showRow3()">
+                        </div>
+                        <div class="content_align">
+                            <p>Article :</p>
+                            <input type="checkbox" checked id="input4" onclick="showRow4()">
+                        </div>
+                    </div>
+                    <div class="show_table">
+                        <div class="content_align">
+                            <p>Variante :</p>
+                            <input type="checkbox" class="input_show_table" checked id="input5" onclick="showRow5()">
+                        </div>
+                        <div class="content_align">
+                            <p>Quantité :</p>
+                            <input type="checkbox" class="input_show_table" checked id="input6" onclick="showRow6()">
+                        </div>
+                        <div class="content_align">
+                            <p>Commandé par :</p>
+                            <input type="checkbox" class="input_show_table" checked id="input7" onclick="showRow7()">
+                        </div>
+                        <div class="content_align">
+                            <p>Statut :</p>
+                            <input type="checkbox" class="input_show_table" checked id="input8" onclick="showRow8()">
+                        </div>
+                        <div class="content_align">
+                            <p>Commandé le :</p>
+                            <input type="checkbox" checked id="input9" onclick="showRow9()">
+                        </div>
+                    </div>
+                    <div class="show_table">
+                        <div class="content_align">
+                            <p>Reçu le :</p>
+                            <input type="checkbox" class="input_show_table" checked id="input10" onclick="showRow10()">
+                        </div>
+                        <div class="content_align">
+                            <p>Remarques :</p>
+                            <input type="checkbox" class="input_show_table" checked id="input11" onclick="showRow11()">
+                        </div>
+                        <div class="content_align">
+                            <p>Fournisseur :</p>
+                            <input type="checkbox" class="input_show_table" checked id="input12" onclick="showRow12()">
+                        </div>
+                        <div class="content_align">
+                            <p>No. Article :</p>
+                            <input type="checkbox" checked id="input13" onclick="showRow13()">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <script src="{{ url_for('static', filename='js/script.js')}}"></script>

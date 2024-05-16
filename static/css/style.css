@@ -195,9 +195,9 @@ li a {
 }
 
 /* Cacher la colonne des ID */
-.index1, .index2, .index3 {
+/*.index1, .index2, .index3 {
   display: none;
-}
+}*/
 
 #btn_settings {
   padding-bottom: 10px;
@@ -210,7 +210,7 @@ li a {
   margin: 0 0 0 10px;
   box-shadow: none;
   color: green;
-  position: fixed;
+  position: relative;
 }
 
 #searche {
@@ -221,4 +221,33 @@ li a {
 #navigation_bar {
   display: flex;
   flex-direction: row;
+}
+
+.show_table {
+  display: flex;
+  flex-direction: column;
+}
+
+.content_align {
+  display: flex;
+  flex-direction: row;
+}
+
+#div_show_table {
+  background-color: #d2d2d2;
+  border-radius: 30px;
+  margin: 0 0 0 0;
+  padding: 0 20% 0 20%;
+}
+
+.input_show_table {
+  margin-right: 10px;
+}
+
+#btn_modal_settings_show {
+  color: black;
+}
+
+#btn_modal_settings_show_fourn {
+  color: black;
 }

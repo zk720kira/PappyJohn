@@ -8,19 +8,10 @@ import secrets
 import pymysql
 
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.engine import cursor
 
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)  # Génère une clé secrète aléatoire de 32 caractères
 app.config["UPLOAD_FOLDER"] = "static"
-
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:@localhost:3306/ruegg_thomas_expi1b_pappy_john"
-db = SQLAlchemy(app)
-
-
-class Data(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    # Définition des autres champs de la table
 
 
 # Fonction pour trier les données de commandes par numéro de commande
@@ -32,7 +23,9 @@ def sort_cmd_data(data, order):
 @app.route('/')
 def afficher_donnees():
     try:
-        connection = pymysql.connect(host=os.getenv("DB_HOST"),
+        host = os.getenv("DB_HOST")
+
+        connection = pymysql.connect(host=host,
                                      user=os.getenv("DB_USER_A"),
                                      password=os.getenv("DB_PASSWORD"),
                                      database=os.getenv("DB_NAME"))
@@ -243,13 +236,9 @@ def insert_data_fournisseur():
 @app.route('/handle_action', methods=['POST'])
 def handle_action():
     data = request.get_json()
-    id_commande = data.get('id')
+    id_commande = data.get('id_commande')
     id_fourn = data.get('id_fourn')
     id_article = data.get('id_article')
-    content = data.get('content')
-    article = data.get('article')
-    quantity = data.get('quantity')
-    command_by = data.get('command_by')
     action = data.get('action')
 
     # Si l'action est delete, on supprime la commande
@@ -278,10 +267,9 @@ def handle_action():
                         JOIN tblcommande AS cmd ON CF.Fk_Cmd = cmd.Id_commande
                         JOIN tblcmd_art AS CA ON cmd.Id_commande = CA.Fk_Cmd
                         JOIN tblarticle AS art ON CA.Fk_Art = art.Id_article
-                        WHERE cmd.CmdNo_Commande = %s AND art.ArtArticle = %s AND art.ArtQuantite = %s
-                        AND cmd.CmdPers_passe_Cmd = %s;
+                        WHERE cmd.Id_commande = %s;
                         """)
-            cursor.execute(move, (content, article, quantity, command_by))
+            cursor.execute(move, (id_commande))
 
             # Supprimer les données une fois qu'elles ont été déplacées dans la table "poubelle"
             remove = ("""
@@ -290,10 +278,9 @@ def handle_action():
                         JOIN tblcommande AS cmd ON CF.Fk_Cmd = cmd.Id_commande
                         JOIN tblcmd_art AS CA ON cmd.Id_commande = CA.Fk_Cmd
                         JOIN tblarticle AS art ON CA.Fk_Art = art.Id_article
-                        WHERE cmd.CmdNo_Commande = %s AND art.ArtArticle = %s AND art.ArtQuantite = %s
-                        AND cmd.CmdPers_passe_Cmd = %s;
+                        WHERE cmd.Id_commande = %s
                         """)
-            cursor.execute(remove, (content, article, quantity, command_by))
+            cursor.execute(remove, id_commande)
 
             # Réactiver les contraintes de clé étrangère
             cursor.execute("SET FOREIGN_KEY_CHECKS = 1")
