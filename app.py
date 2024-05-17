@@ -1,4 +1,5 @@
 # Thomas Rüegg
+# ---Imports---
 import os
 
 from flask import request, jsonify, Flask, render_template, redirect, url_for, session
@@ -7,8 +8,14 @@ import secrets
 
 import pymysql
 
+from dotenv import load_dotenv
+
 from flask_sqlalchemy import SQLAlchemy
 
+# Charger les variables d'environnement à partir du fichier .env
+load_dotenv()
+
+# Configuration de l'application
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)  # Génère une clé secrète aléatoire de 32 caractères
 app.config["UPLOAD_FOLDER"] = "static"
@@ -19,18 +26,21 @@ def sort_cmd_data(data, order):
     return sorted(data, key=lambda x: int(x[0]), reverse=(order == 'DESC'))
 
 
-# Route pour afficher les données dans une page HTML
+# Route pour afficher les données dans les tableaux html
 @app.route('/')
+# Fonction pour afficher les données sur les commandes et les fournisseurs
 def afficher_donnees():
     try:
         host = os.getenv("DB_HOST")
 
+        # Connexion à la base de données via des variables d'environnements
         connection = pymysql.connect(host=host,
                                      user=os.getenv("DB_USER_A"),
                                      password=os.getenv("DB_PASSWORD"),
                                      database=os.getenv("DB_NAME"))
         cursor = connection.cursor()
     except Exception as e:
+        # Afficher une page web avec des astuces en cas d'exception
         return """<h1><center>La connexion à la base de données a échoué !</h1>
                <br>
                <h2>Astuces :</h2>
@@ -41,9 +51,8 @@ def afficher_donnees():
                </ol>
                """
 
-    # Utilisation de try pour éviter des exceptions avec des query SQL
     try:
-        # Requête pour obtenir les données des commandes
+        # Requête pour obtenir les données sur les commandes
         cursor.execute("""
                         SELECT cmd.CmdNo_Commande, cmd.Id_commande, fourn.Id_Fourn, art.Id_article, art.ArtArticle, art.ArtVariante, art.ArtQuantite, cmd.CmdPers_passe_Cmd, cmd.CmdStatus, 
                         DATE_FORMAT(cmd.CmdCommande_le, '%d.%m.%Y'), DATE_FORMAT(cmd.CmdRecu_le, '%d.%m.%Y'),
@@ -76,11 +85,12 @@ def afficher_donnees():
         sorted_data = sort_cmd_data(query_data, order)
 
     except Exception as e:
+        # Afficher l'exception dans la commande python
         connection.rollback()
         print("Erreur lors de l'insertion : ", e)
 
     try:
-        # Récupérer les fournisseurs éxistant pour la liste déroulante
+        # Récupérer les fournisseurs éxistant pour la liste déroulante dans l'intérface de modification des commandes
         cursor.execute("""
                         SELECT DISTINCT FournNom_fournisseur FROM tblfournisseur
                         """)
@@ -102,72 +112,61 @@ def afficher_donnees():
                           """)
         fournisseur = cursor.fetchall()
     except Exception as e3:
+        # Afficher l'exception dans la commande python
         connection.rollback()
         print("Erreur lors de l'insertion : ", e3)
 
     try:
-        # Récupérer l'ID et le numéro des commandes pour les affichers dans le popup pour supprimer et modifier les commandes
-        cursor.execute("SELECT Id_commande, CmdNo_Commande FROM tblcommande")
-        RemoveModify_data = cursor.fetchall()
-    except Exception as e4:
-        connection.rollback()
-        print("Erreur lors de l'insertion : ", e4)
-
-    try:
-        # Récupérer l'ID des commandes pour la liste déroulante dans le popup pour supprimer et modifier les commandes
-        cursor.execute("SELECT Id_commande FROM tblcommande")
-        selected_cmd_id = cursor.fetchall()
-    except Exception as e5:
-        connection.rollback()
-        print("Erreur lors de l'insertion : ", e5)
-
-    try:
+        # Envoyer les données au html
         return render_template("index.html", query_data=sorted_data, order=order, next_order=next_order,
-                               fournisseur_data=fournisseur_data, fournisseur=fournisseur,
-                               RemoveModify_data=RemoveModify_data, selected_cmd_id=selected_cmd_id, )
+                               fournisseur_data=fournisseur_data, fournisseur=fournisseur, )
     except Exception as e8:
+        # Afficher l'exception dans la commande python
         connection.rollback()
         print("Erreur lors de l'insertion : ", e8)
     finally:
+        # Fermer la connexion
         connection.close()
 
 
-# Insréer des nouvelles commandes
+# Route pour insréer des nouvelles commandes
 @app.route("/insert_data", methods=['POST'])
+# Fonction pour insérer des nouvelles commandes
 def insert_data():
+    # Si la la request method est POST
     if request.method == 'POST':
-        # Réqupérer les données
-        no_commande = request.form['no_commande']
-        article = request.form['article']
-        variante = request.form['variante']
-        quantite = request.form['quantite']
-        commande_par = request.form['commande_par']
-        statut = request.form['statut']
-        commande_le = request.form['commande_le']
-        recu_le = request.form['recu_le']
-        remarque = request.form['remarque']
-        no_article = request.form['no_article']
-        fournisseur = request.form['fournisseur']
+        # Réqupérer les données dans le formulaire html
+        no_commande = request.form['no_commande']  # No. de commande
+        article = request.form['article']  # Article
+        variante = request.form['variante']  # Variante
+        quantite = request.form['quantite']  # Quantité
+        commande_par = request.form['commande_par']  # Commandé par
+        statut = request.form['statut']  # Statut
+        commande_le = request.form['commande_le']  # Commandé le
+        recu_le = request.form['recu_le']  # Reçu le
+        remarque = request.form['remarque']  # Remarque
+        no_article = request.form['no_article']  # No. d'article
+        fournisseur = request.form['fournisseur']  # Fournisseur
 
+        # Connexion à la base de données via des variables d'environnements
         connection = pymysql.connect(host=os.getenv("DB_HOST"),
                                      user=os.getenv("DB_USER_C"),
                                      password=os.getenv("DB_PASSWORD_C"),
                                      database=os.getenv("DB_NAME"))
         cursor = connection.cursor()
 
-        # Utilisation de try pour se protéger des exceptions des query SQL
         try:
             # Insérer les données dans la table tblarticle
             sql_article = ("INSERT INTO tblarticle(ArtArticle, ArtVariante, ArtQuantite,"
                            "ArtNo_Article) VALUES (%s, %s, %s, %s)")
             cursor.execute(sql_article, (article, variante, quantite, no_article))
-            article_id = cursor.lastrowid  # Récupérer l'ID inséré
+            article_id = cursor.lastrowid  # Récupérer l'ID de l'article inséré
 
             # Insérer les données dans la table tblcommande
             sql_commande = ("INSERT INTO tblcommande(CmdNo_Commande, CmdPers_passe_Cmd, CmdStatus, CmdCommande_le,"
                             "CmdRecu_le, CmdRemarque) VALUES (%s, %s, %s, %s, %s, %s)")
             cursor.execute(sql_commande, (no_commande, commande_par, statut, commande_le, recu_le, remarque))
-            commande_id = cursor.lastrowid  # Récupérer l'ID inséré
+            commande_id = cursor.lastrowid  # Récupérer l'ID de la commande inséré
 
             # Récupérer l'ID du fournisseur séléctionner dans le formulaire
             cursor.execute("SELECT Id_Fourn FROM tblfournisseur WHERE FournNom_fournisseur = %s", fournisseur)
@@ -185,29 +184,33 @@ def insert_data():
             connection.commit()
             return redirect(url_for('afficher_donnees'))
         except Exception as e:
+            # Afficher l'exception dans la commande python
             connection.rollback()
             print("Erreur lors de l'insertion : ", e)
         finally:
+            # Fermer la connexion
             connection.close()
 
 
-# Insérer des nouveaux fournisseurs
+# Route pour insérer des nouveaux fournisseurs
 @app.route("/insert_data_fournisseur", methods=['POST'])
+# Fonction pour insérer des nouveau fournisseurs
 def insert_data_fournisseur():
+    # Si la request method est POST
     if request.method == 'POST':
-        # Récupérer les données
-        nom = request.form['nom']
-        domaine_vente = request.form['domaine_vente']
-        email = request.form['email']
-        tel = request.form['tel']
+        # Récupérer les données du formulaire html
+        nom = request.form['nom']  # Nom du fournisseur
+        domaine_vente = request.form['domaine_vente']  # Domaine de vente
+        email = request.form['email']  # Email
+        tel = request.form['tel']  # Numéro de téléphone
 
+        # Connexion à la base de données via des variables d'environnement
         connection = pymysql.connect(host=os.getenv("DB_HOST"),
                                      user=os.getenv("DB_USER_C"),
                                      password=os.getenv("DB_PASSWORD_C"),
                                      database=os.getenv("DB_NAME"))
         cursor = connection.cursor()
 
-        # Utilisation de try pour se protéger des exceptions des query SQL
         try:
             # Insérer les données dans la table tblfournisseur
             sql_fournisseur = "INSERT INTO tblfournisseur(FournNom_fournisseur, Fourn_domaine_vente) VALUES (%s, %s)"
@@ -226,31 +229,35 @@ def insert_data_fournisseur():
             connection.commit()
             return redirect(url_for('afficher_donnees'))
         except Exception as e:
+            # Afficher l'exception dans la commande python
             connection.rollback()
             print("Erreur lors de l'insertion : ", e)
         finally:
+            # Fermer la connexion
             connection.close()
 
 
 # Route pour traiter les actions des commandes
 @app.route('/handle_action', methods=['POST'])
+# Fonction pour traiter les actions des commandes
 def handle_action():
+    # Récupérer les données envoyé par le JSON
     data = request.get_json()
-    id_commande = data.get('id_commande')
-    id_fourn = data.get('id_fourn')
-    id_article = data.get('id_article')
-    action = data.get('action')
+    id_commande = data.get('id_commande')  # Id de commande
+    id_fourn = data.get('id_fourn')  # Id du fournisseur
+    id_article = data.get('id_article')  # Id de l'article
+    action = data.get('action')  # Action à effectuer
 
     # Si l'action est delete, on supprime la commande
     if action == 'delete':
-        # Connexion à la base de données
+        # Connexion à la base de données via des variables d'environnement
         connection = pymysql.connect(host=os.getenv("DB_HOST"),
                                      user=os.getenv("DB_USER_A"),
                                      password=os.getenv("DB_PASSWORD_A"),
                                      database=os.getenv("DB_NAME"))
         cursor = connection.cursor()
 
-        # Requête SQL pour supprimer la commande
+        # Requête SQL pour supprimer la commande (déplacer dans une table "poubelle"
         try:
             # Désactiver temporairement les contraintes de clé étrangère
             cursor.execute("SET FOREIGN_KEY_CHECKS = 0")
@@ -286,15 +293,19 @@ def handle_action():
             cursor.execute("SET FOREIGN_KEY_CHECKS = 1")
 
             connection.commit()
+            # Envoyer un message de confirmation au JSON
             return jsonify({'message': 'Commande supprimé avec succès !'})
         except Exception as e:
+            # En cas d'exception envoyer un message au JSON
             connection.rollback()
             return jsonify({'message': 'Une erreur est survenue lors de la suppression des données'})
         finally:
+            # Fermer la connexion à la base de données
             connection.close()
 
-    # Si l'action est update, on modifie la commande
+    # Si l'action est update, on récupère les données à modfier pour les faire apparaitre dans une interface de modification, la modification se fera dans une autre route
     elif action == 'update':
+        # Connexion à la base de données
         connection = pymysql.connect(host=os.getenv("DB_HOST"),
                                      user=os.getenv("DB_USER_B"),
                                      password=os.getenv("DB_PASSWORD_B"),
@@ -302,12 +313,12 @@ def handle_action():
         cursor = connection.cursor()
 
         try:
-            # Stocker les id dans la session flask
+            # Stocker les id (id de commande, id de fournisseur, id d'article) qui sont en lien avec la commande à modifier dans la session flask
             session['id_commande'] = id_commande
             session['id_fourn'] = id_fourn
             session['id_article'] = id_article
 
-            # Récupérer les types de données des colonnes
+            # Récupérer les types de données des colonnes pour pouvoir ensuite adapter le type des inputs qui seront dans l'interface de modification par apports au données qu'ils contiennent
             cursor.execute("""
                 SELECT 
                     c.COLUMN_NAME,
@@ -326,7 +337,7 @@ def handle_action():
             """)
             column_types = cursor.fetchall()
 
-            # Requete SQl pour séléctionner les données pour la modification
+            # Requete SQl pour séléctionner les données pour générer l'interface de modification
             cursor.execute("""
                                     SELECT cmd.CmdNo_Commande, art.ArtArticle, art.ArtVariante, art.ArtQuantite,
                                     cmd.CmdPers_passe_Cmd, cmd.CmdStatus, cmd.CmdCommande_le,cmd.CmdRecu_le,
@@ -357,41 +368,49 @@ def handle_action():
                 else:
                     form_fields.append({'name': column_name, 'type': 'text', 'value': row})
 
+            # Envoyer les données aux JSON pour qu'il puisse générer l'interface de modification
             return jsonify({'data': form_fields, 'action': 'update'})
         except Exception as e:
+            # En cas d'erreur envoyer un message au JSON
             connection.rollback()
             return jsonify({'message': 'Une erreur est survenue !', 'error': str(e)})
         finally:
+            # Fermer la connexion à la base de données
             connection.close()
 
 
 # Route pour modifier les commandes
 @app.route('/modifier_commandes', methods=['POST'])
+# Fonction pour modifier les commandes
 def modifier_commandes():
+    # Si la request method est POST
     if request.method == 'POST':
-        no_commandes = request.form['CmdNo_Commande']
-        article = request.form['ArtArticle']
-        variante = request.form['ArtVariante']
-        quantite = request.form['ArtQuantite']
-        commande_par = request.form['CmdPers_passe_Cmd']
-        statut = request.form['CmdStatus']
-        commande_le = request.form['CmdCommande_le']
-        recu_le = request.form['CmdRecu_le']
-        remarques = request.form['CmdRemarque']
-        fournisseur = request.form['fournisseur_name']
-        no_article = request.form['ArtNo_Article']
-        id_commande = session.get('id_commande')
-        id_fourn = session.get('id_fourn')
-        id_article = session.get('id_article')
+        # Récupérer les données dans le formulaire html
+        no_commandes = request.form['CmdNo_Commande']  # No. de commande
+        article = request.form['ArtArticle']  # Article
+        variante = request.form['ArtVariante']  # Variante
+        quantite = request.form['ArtQuantite']  # Quantité
+        commande_par = request.form['CmdPers_passe_Cmd']  # Commadé par
+        statut = request.form['CmdStatus']  # Statut
+        commande_le = request.form['CmdCommande_le']  # Commadé le
+        recu_le = request.form['CmdRecu_le']  # Reçu le
+        remarques = request.form['CmdRemarque']  # Remarques
+        fournisseur = request.form['fournisseur_name']  # Fournisseur
+        no_article = request.form['ArtNo_Article']  # No. d'article
+        # Récupérer les données dans la session FLASK
+        id_commande = session.get('id_commande')  # Id de commande
+        id_fourn = session.get('id_fourn')  # Id de fournisseur
+        id_article = session.get('id_article')  # Id d'article
 
-        # Connexion à la base de données
+        # Connexion à la base de données via des variables d'environnement
         connection = pymysql.connect(host=os.getenv("DB_HOST"),
                                      user=os.getenv("DB_USER_D"),
                                      password=os.getenv("DB_PASSWORD_D"),
                                      database=os.getenv("DB_NAME"))
         cursor = connection.cursor()
+
         try:
-            # Récupérer l'ID du fournisseur séléctionner dans le formulaire
+            # Récupérer l'ID du fournisseur séléctionner dans l'interface de modification
             cursor.execute("SELECT Id_Fourn FROM tblfournisseur WHERE FournNom_fournisseur = %s", fournisseur)
             row = cursor.fetchone()
             id_selected_fourn = row[0]
@@ -425,23 +444,28 @@ def modifier_commandes():
             connection.commit()
             return redirect(url_for('afficher_donnees'))
         except Exception as e:
+            # En cas d'exception retourner une erreur
             connection.rollback()
             return "Une erreur est survenue", e
         finally:
+            # Fermer la connexion
             cursor.close()
 
 
 # Route pour traiter les actions des fournisseurs
 @app.route('/handle_action_fourn', methods=['POST'])
+# Fonction pour traiter les actions des fournisseurs
 def handle_action_fourn():
+    # Récupérer les données envoyés par le JSON
     data = request.get_json()
-    content = data.get('content')
-    email = data.get('email')
-    action = data.get('action')
+    content = data.get('content')  # Nom du fournisseur
+    email = data.get('email')  # Email
+    action = data.get('action')  # Action à effectuer
 
     try:
         # Si l'action est delete, supprimer le fournisseur
         if action == 'delete':
+            # Connexion à la base de données via des variables d'environnement
             with pymysql.connect(host=os.getenv("DB_HOST"),
                                  user=os.getenv("DB_USER_A"),
                                  password=os.getenv("DB_PASSWORD_A"),
@@ -489,8 +513,9 @@ def handle_action_fourn():
                 connection.commit()
                 return jsonify({'message': '000'}), 200  # Fournisseur supprimé avec succès !
 
-        # Si l'action est update, modifier le fournisseur
+        # Si l'action est update, récupérer les données du fournisseur à modifier pour ensuite générer une interface de modification, les modifications se feront dans une autre route
         elif action == 'update':
+            # Connexion à la base de données via des variables d'environnement
             with pymysql.connect(host=os.getenv("DB_HOST"),
                                  user=os.getenv("DB_USER_B"),
                                  password=os.getenv("DB_PASSWORD_B"),
@@ -509,7 +534,7 @@ def handle_action_fourn():
                 # Stocker id_fournisseur dans la session Flask
                 session['id_fournisseur'] = id_fournisseur
 
-                # Récupérer les types de données des colonnes
+                # Récupérer les types de données des colonnes pour pouvoir ensuite adapter le type des inputs qui seront dans l'interface de modification par apport au type de données
                 cursor.execute("""
                     SELECT 
                         c.COLUMN_NAME,
@@ -524,7 +549,7 @@ def handle_action_fourn():
                         """)
                 column_types = cursor.fetchall()
 
-                # Requete SQl pour séléctionner les données pour la modification
+                # Requete SQl pour séléctionner les données pour générer l'interface de modification
                 cursor.execute("""
                                 SELECT DISTINCT fourn.FournNom_fournisseur, fourn.Fourn_domaine_vente, cont.ContNo_telephone,
                                 cont.ContMail
@@ -546,29 +571,37 @@ def handle_action_fourn():
                     elif data_fourn_type == 'varchar':
                         form_fields.append({'name': column_fourn_name, 'type': 'text', 'value': row})
                     elif data_fourn_type == 'date':
-                        form_fields.append({'name': column_fourn_name, 'type': 'date', 'value': row.strftime('%Y-%m-%d')})
+                        form_fields.append(
+                            {'name': column_fourn_name, 'type': 'date', 'value': row.strftime('%Y-%m-%d')})
                     else:
                         form_fields.append({'name': column_fourn_name, 'type': 'text', 'value': row})
 
+                # Envoyer les données au JSON
                 return jsonify({'action': 'update', 'form_fields': form_fields}), 200
 
         else:
+            # Retourner un message d'erreur au JSON si l'action n'est pas 'update' ou 'delete'
             return jsonify({'message': 'Action inconnue'}), 400
     except Exception as e:
+        # En cas d'exception envoyer un message au JSON
         return jsonify({'message': 'Une erreur est survenue lors du traitement de la requête'}), 500
 
 
 # Route pour modifier les données sur les fournisseurs
 @app.route('/modifier_fournisseur', methods=['POST'])
+# Fonction pour modifier les donnéees sur les fournisseurs
 def modifier_fournisseur():
+    # Si la request method est POST
     if request.method == 'POST':
-        nom_fournisseur = request.form['FournNom_fournisseur']
-        domaine_vente = request.form['Fourn_domaine_vente']
-        no_telephone = request.form['ContNo_telephone']
-        email = request.form['ContMail']
-        id_fournisseur = session.get('id_fournisseur')
+        # Récupérer les données du formulaire html
+        nom_fournisseur = request.form['FournNom_fournisseur']  # Nom du fournisseur
+        domaine_vente = request.form['Fourn_domaine_vente']  # Domane de vente
+        no_telephone = request.form['ContNo_telephone']  # Numéro de téléphone
+        email = request.form['ContMail']  # Email
+        # Récupérer les données dans la session FLASK
+        id_fournisseur = session.get('id_fournisseur')  # Id du fournisseur qui à été séléctionné pour la modification
 
-        # Connexion à la base de données
+        # Connexion à la base de données via des variables d'environnements
         connection = pymysql.connect(host=os.getenv("DB_HOST"),
                                      user=os.getenv("DB_USER_D"),
                                      password=os.getenv("DB_PASSWORD_D"),
@@ -606,15 +639,19 @@ def modifier_fournisseur():
             connection.commit()
             return redirect(url_for('afficher_donnees'))
         except Exception as e:
+            # En cas d'exception retourner une erreur
             connection.rollback()
             return f"Une erreur est survenue: {str(e)}"
         finally:
+            # Fermer la connexion à la base de données
             connection.close()
 
 
-# Router pour revenire en arrière après une suppresion de commande
+# Route pour revenir en arrière après une suppresion de commande
 @app.route('/back_cmd_remove', methods=['POST'])
+# Fonction poiur revenir en arrière après une suppression de commande
 def back_cmd_remove():
+    # Si la request method est POST
     if request.method == 'POST':
         # Connexion à la base de données
         connection = pymysql.connect(host=os.getenv("DB_HOST"),
@@ -624,7 +661,8 @@ def back_cmd_remove():
 
         cursor = connection.cursor()
 
-        active = request.json['active']
+        # Récupérer les données envoyées par le JSON
+        active = request.json['active']  # Activation du processus pour faire revenir une commande
 
         # Si la variable active est égale à "YES" on fait revenir la commande
         if active == 'YES':
@@ -688,17 +726,22 @@ def back_cmd_remove():
                 cursor.execute(remove, (last_id,))
 
                 connection.commit()
+                # Envoyer un message au JSON pour confirmer que la commande à bien été restaurée
                 return jsonify({'message': 'Commande restaure avec succes !'})
             except Exception as e:
+                # En cas d'exception envoyer un message au JSON
                 connection.rollback()
                 return jsonify({'message': str(e)})
             finally:
+                # Fermer la connexion à la base de données
                 connection.close()
 
 
 # Route pour faire revenir un fournisseur supprimé
 @app.route('/back_fourn_remove', methods=['POST'])
+# Fonction pour faire revenir un fournisseur supprimé
 def back_fourn_remove():
+    # Si la request method est POST
     if request.method == 'POST':
         # Connexion à la base de données
         connection = pymysql.connect(host=os.getenv("DB_HOST"),
@@ -708,7 +751,8 @@ def back_fourn_remove():
 
         cursor = connection.cursor()
 
-        active = request.json['active']
+        # Récupérer les données envoyées par le JSON
+        active = request.json['active']  # Activation du processus pour faire revenir une commande
 
         # Si la variable active est égale à "YES" on fait revenir le fournisseur
         if active == 'YES':
@@ -753,11 +797,14 @@ def back_fourn_remove():
                 cursor.execute(remove, (last_id,))
 
                 connection.commit()
+                # Envoyer un message au JSON pour confirmer que le fournisseur à bien été restauré
                 return jsonify({'message': '000'})  # Code pour indiquer que le fournisseur à été restauré
             except Exception as e:
+                # En cas d'exception envoyer une mesage au JSON
                 connection.rollback()
                 return jsonify({'message': str(e)})
             finally:
+                # Fermer la connexion à la base de données
                 connection.close()
 
 

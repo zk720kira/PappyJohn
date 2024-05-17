@@ -57,7 +57,7 @@ try:
                     # Créer l'utilisateur
                     cursor.execute(f"CREATE USER '{user}'@'localhost' IDENTIFIED BY '{password}';")
                     # Accorder des privilèges spécifiques sur la table
-                    cursor.execute(f"GRANT {privileges} ON table_name.* TO '{user}'@'localhost';")
+                    cursor.execute(f"GRANT {privileges} ON {table_name}.* TO '{user}'@'localhost';")
                     print(f"User created and granted privileges.")
             except Exception as e:
                 print(f"Error processing user: {e}")
