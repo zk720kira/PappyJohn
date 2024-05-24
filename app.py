@@ -488,7 +488,7 @@ def handle_action_fourn():
 
                 # Déplacer le fournisseur dans la table "poubelle"
                 move = ("""
-                            INSERT INTO tblsarlacc2 (SANom_fournisseur, SADoaine_vente, SATelephone, SAMail)
+                            INSERT INTO tblsarlacc2 (SANom_fournisseur, SADomaine_vente, SATelephone, SAMail)
                             SELECT fourn.FournNom_fournisseur, fourn.Fourn_domaine_vente, cont.ContNo_telephone, cont.ContMail
                             FROM tblfournisseur AS fourn
                             JOIN tblfourn_cont AS FC ON fourn.Id_Fourn = FC.Fk_Fourn
@@ -764,7 +764,7 @@ def back_fourn_remove():
                 # Déplacer le fournissuer de la table "poubelle" dans la table tblfournisseur
                 move_tblfournisseur = ("""
                                         INSERT INTO tblfournisseur (FournNom_fournisseur, Fourn_domaine_vente)
-                                        SELECT SANom_fournisseur, SADoaine_vente
+                                        SELECT SANom_fournisseur, SADomaine_vente
                                         FROM tblsarlacc2
                                         WHERE Id_sarlacc = %s
                                         """)
