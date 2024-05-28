@@ -7,13 +7,13 @@ echo Si non pressez sur Enter pour continuer.
 
 PAUSE
 
-cd C:\
-
-REM Cloner le dépôt GitHub
-git clone https://github.com/zk720kira/PappyJohn
-
 REM Naviguer vers le répertoire cloné
 cd C:\PappyJohn
+
+REM Installer Python
+echo Installation de python.
+echo Cela peux prendre quelques minutes.
+C:\PappyJohn\python-3.12.2-amd64.exe PrependPath=1 /quiet
 
 REM Installer les dépendances Python
 python -m ensurepip
