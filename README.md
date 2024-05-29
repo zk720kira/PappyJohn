@@ -10,7 +10,7 @@ Voici le lien pour télécharger Laragon :
 [Laragon.exe](https://github.com/leokhoa/laragon/releases/download/6.0.0/laragon-wamp.exe)
 
 Une fois téléchargé, il faut exécuter l'exécutable.
-![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111286&authkey=%21AD9rho5_rleqvb0&width=225&height=40)
+![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111286&authkey=%21AD9rho5_rleqvb0&width=225&height=40)  
 L'exécutable est par défaut dans le dossier ***téléchargement***.
 
 1) Sélectionner la langue d'installation qui vous convient (l'exemple est fait en français).
@@ -41,9 +41,12 @@ Vous devrez arriver sur cette page :
 Pour insteller l'application il faut ouvrir une invite de commande et executé un script.
 1) Appuyer sur le boutton Windows.
 2) Tapper ***'cmd'*** et appuyer sur la toucher Entrer.
-3) Copier ce code :
-'''javascript
+3) Copier ce code : 
+```batch
 cd C:\
 git clone https://github.com/zk720kira/PappyJohn
 cd C:\PappyJohn
-'''
+echo Installation terminee appuyer sur Enter pour fermer cette fenetre
+PAUSE
+```
+4) Coller le dans l'invite de commande et appuyer sur le bouton Enter pour l'exécuter.
