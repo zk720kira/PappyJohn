@@ -23,7 +23,7 @@ C:\PappyJohn\python-3.12.2-amd64.exe /quiet PrependPath=1
 REM Installer MySQL
 echo Installation de MySQL.
 echo Cela peut prendre quelques minutes.
-winget install Oracle.MySQL /quiet
+winget install Oracle.MySQL --silent
 
 echo L'installation est ternimee. Veuillez executer le script 'Configuration.bat'.
 PAUSE
