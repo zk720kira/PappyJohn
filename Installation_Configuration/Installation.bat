@@ -13,7 +13,7 @@ cd C:\PappyJohn
 REM Installer Python
 echo Installation de Python.
 echo Cela peut prendre quelques minutes.
-C:\PappyJohn\python-3.12.2-amd64.exe /quiet PrependPath=1
+C:\PappyJohn\python-3.12.2-amd64.exe PrependPath=1 /quiet
 
 REM Installer MySQL
 REM echo Installation de MySQL.
