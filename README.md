@@ -4,6 +4,7 @@ Cette application WEB permet d'avoir un suivi de ces commandes ainsi que de ces 
 # Installation
 - Installation de Laragon.
 - Configuration de Laragon.
+- Installation de Git.
 - Installation de l'application.
 ### Installer Laragon
 Voici le lien pour télécharger Laragon :
@@ -36,6 +37,13 @@ Vous devrez arriver sur cette page :
 3) Une fois que c'est fait vous pouvez appuyer sur la croix puis sur "Démarrer".
 ![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111295&authkey=%21AGQjqdWb79Ulzus&width=1002&height=669)
 **La configuration est ternimée et le serveur MySQL est démarré !**
+
+### Installer Git
+Pour pouvoir installer l'application nous devons d'abord installer Git.
+Voici le lien pour installer Git : [Git.exe](https://github.com/git-for-windows/git/releases/download/v2.45.1.windows.1/Git-2.45.1-64-bit.exe) \
+Une fois installé il faut exécuter l'exécutable.
+![]()
+
 
 ### Installer l'application
 Pour insteller l'application il faut ouvrir une invite de commande et executé un script.
