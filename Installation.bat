@@ -25,5 +25,5 @@ echo Installation de MySQL.
 echo Cela peut prendre quelques minutes.
 winget install Oracle.MySQL /quiet
 
-echo Execution du script 'configuration.bat'
-C:\PappyJohn\Configuration.bat
+echo L'installation est ternimee. Veuillez executer le script 'Configuration.bat'.
+PAUSE
