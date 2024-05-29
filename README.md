@@ -5,7 +5,7 @@ Cette application WEB permet d'avoir un suivi de ces commandes ainsi que de ces 
 - Installation de Laragon.
 - Configuration de Laragon.
 - Installation de Git.
-- Installation de l'application.
+- Installation de l'application Flask.
 ### Installer Laragon
 Voici le lien pour télécharger Laragon :
 [Laragon.exe](https://github.com/leokhoa/laragon/releases/download/6.0.0/laragon-wamp.exe)
@@ -41,14 +41,22 @@ Vous devrez arriver sur cette page :
 ### Installer Git
 Pour pouvoir installer l'application nous devons d'abord installer Git.
 Voici le lien pour installer Git : [Git.exe](https://github.com/git-for-windows/git/releases/download/v2.45.1.windows.1/Git-2.45.1-64-bit.exe) \
-Une fois installé il faut exécuter l'exécutable.
-![]()
+Une fois télécharché il faut exécuter une commande dans une invite de commande en Administrateur.
+1) Appuyer sur la touce Windows.
+2) Tapper cmd et cliquer sur *'exécuter en tant qu'administrateur'*.
+![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111300&authkey=%21AC6fLN-siTrca_Q&width=782&height=636)
+4) Copier la commande ci-dessous et coller la dans l'invite de commande :
+```batch=
+"%USERPROFILE%\Downloads\Git-2.45.1-64-bit.exe" /silent
+```
+5) Appuyer sur la touche Enter si la commande ne c'est pas exécutée.
+Une fois la command exécutée l'installation de Git commencera. Quand la barre de progression sera pleine la fenêtre se fermera, à ce moment vous pourrez fermer l'invite de commande en cliquant sur la crois en haut à gauche. \
+**L'instalation de Git est terminée**
 
-
-### Installer l'application
-Pour insteller l'application il faut ouvrir une invite de commande et executé un script.
+### Installer l'application Flask
+Pour insteller l'application Flask il faut ouvrir une invite de commande et exécuter un script.
 1) Appuyer sur le boutton Windows.
-2) Tapper ***'cmd'*** et appuyer sur la toucher Entrer.
+2) Tapper ***'cmd'*** et appuyer sur la toucher Enter.
 3) Copier ce code : 
 ```batch=
 @echo off
