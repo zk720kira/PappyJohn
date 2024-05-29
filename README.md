@@ -70,12 +70,10 @@ exit
 ```
 4) Coller le dans l'invite de commande et appuyer sur le bouton Enter pour l'exécuter.
 5) A la fin de l'installation l'exploreur va s'ouvrir, il faudra exécuter en Administrateur le fichier **'Installation.bat'**.
-![]()Pour ce faire il faut faire un clique droite dessus et cliquer sur ***'exécuter en tant qu'administrateur '***.
-
-6) Lorsque vous avez ce message vous pouvez appuyer sur Enter.
-7) Une console va denouveau s'ouvrir. Après avoir lu les instructions, appuyer sur Enter pour lancer l'installation.
-![]()
-8) A la fin de l'installation vous aurez un message qui vous demandera d'exécuter un autre script. Il faut rentourner dans l'explorateur et faire un doubble clique sur ***'Configuration.bat'***.
-![]()
-9) Cette fois une console va s'ouvrir et se refermer automatiquement après son exécution. Une fois que la fenêtre c'est refermée vous pouvez fermer toutes les invites de commandes soit en cliquant dessus et appuyant sur Enter soit avec la crois en haut à droite de la fenêtre. Vous pouvez aussi fermer l'explorateur de fichier. \
+![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111301&authkey=%21AICdEjg9O3yG0ng&width=1428&height=348)Pour ce faire il faut faire un clique droite dessus et cliquer sur ***'exécuter en tant qu'administrateur '***.
+6) Une console va denouveau s'ouvrir. Après avoir lu les instructions, appuyer sur Enter pour lancer l'installation.
+![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111302&authkey=%21AEe7UoLDfyoHqek&width=1334&height=153)
+7) A la fin de l'installation vous aurez un message qui vous demandera d'exécuter un autre script. Il faut rentourner dans l'explorateur et faire un doubble clique sur ***'Configuration.bat'***.
+![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111303&authkey=%21AIzRCIuuf62mPkc&width=1433&height=344)
+8) Cette fois une console va s'ouvrir et se refermer automatiquement après son exécution. Une fois que la fenêtre c'est refermée vous pouvez fermer toutes les invites de commandes soit en cliquant dessus et appuyant sur Enter soit avec la crois en haut à droite de la fenêtre. Vous pouvez aussi fermer l'explorateur de fichier. \
 **L'installation est completement terminée.**
