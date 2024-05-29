@@ -26,4 +26,5 @@ echo Cela peut prendre quelques minutes.
 winget install Oracle.MySQL --silent
 
 echo L'installation est ternimee. Veuillez executer le script 'Configuration.bat'.
+echo Pressez enter pour fermer cette fenetre.
 PAUSE

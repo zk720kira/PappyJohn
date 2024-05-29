@@ -2,6 +2,9 @@
 Cette application WEB permet d'avoir un suivi de ces commandes ainsi que de ces fournisseurs.
 
 # Installation
+- Installation de Laragon.
+- Configuration de Laragon.
+- Installation de l'application.
 ### Installer Laragon
 Voici le lien pour télécharger Laragon :
 [Laragon.exe](https://github.com/leokhoa/laragon/releases/download/6.0.0/laragon-wamp.exe)
@@ -21,7 +24,8 @@ L'exécutable est par défaut dans le dossier ***téléchargement***.
 ![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111291&authkey=%21ACVT9rgiwQwedbk&width=730&height=563)
 **L'installation est terminée !**
 
-Ensuite on va devoir effectuer une configuration dans Laragon.
+### Configurer Laragon
+Ensuite on va de voir effectuer une configuration dans Laragon.
 Si vous venez de finir l'installation normalement Laragon c'est ouvert, si ce n'est pas le cas il faut l'ouvrir.
 Vous devrez arriver sur cette page :
 ![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111292&authkey=%21AAKaa8cdtZQYvBE&width=1006&height=668)
@@ -32,3 +36,14 @@ Vous devrez arriver sur cette page :
 3) Une fois que c'est fait vous pouvez appuyer sur la croix puis sur "Démarrer".
 ![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111295&authkey=%21AGQjqdWb79Ulzus&width=1002&height=669)
 **La configuration est ternimée et le serveur MySQL est démarré !**
+
+### Installer l'application
+Pour insteller l'application il faut ouvrir une invite de commande et executé un script.
+1) Appuyer sur le boutton Windows.
+2) Tapper ***'cmd'*** et appuyer sur la toucher Entrer.
+3) Copier ce code :
+'''javascript
+cd C:\
+git clone https://github.com/zk720kira/PappyJohn
+cd C:\PappyJohn
+'''
