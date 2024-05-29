@@ -63,8 +63,8 @@ Pour insteller l'application Flask il faut ouvrir une invite de commande et exé
 cls
 cd C:\
 git clone https://github.com/zk720kira/PappyJohn
-cd C:\PappyJohn
-start explorer C:\PappyJohn
+cd C:\PappyJohn\Installation_Configuration
+start explorer C:\PappyJohn\Installation_Configuration
 echo Appuyer sur Enter pour fermer la fenentre.
 exit
 ```
