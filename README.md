@@ -50,7 +50,7 @@ Une fois télécharché il faut exécuter une commande dans une invite de comman
 "%USERPROFILE%\Downloads\Git-2.45.1-64-bit.exe" /silent
 ```
 5) Appuyer sur la touche Enter si la commande ne c'est pas exécutée.
-Une fois la command exécutée l'installation de Git commencera. Quand la barre de progression sera pleine la fenêtre se fermera, à ce moment vous pourrez fermer l'invite de commande en cliquant sur la crois en haut à gauche. \
+Une fois la command exécutée l'installation de Git commencera. Quand la barre de progression sera pleine la fenêtre se fermera, à ce moment vous pourrez fermer l'invite de commande en cliquant sur la croix en haut à droite. \
 **L'instalation de Git est terminée**
 
 ### Installer l'application Flask
