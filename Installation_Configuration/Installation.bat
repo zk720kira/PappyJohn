@@ -21,7 +21,7 @@ REM echo Cela peut prendre quelques minutes.
 REM winget install Oracle.MySQL --silent
 
 REM Ajouter mysql à la variable d'environement PATH du système
-setx /M Path C:\laragon\bin\mysql\mysql-8.0.30-win64\bin
+setx PATH "%PATH%;C:\laragon\bin\mysql\mysql-8.0.30-win64\bin" /M
 
 echo L'installation est ternimee. Veuillez executer le script 'Configuration.bat'.
 echo Pressez enter pour fermer cette fenetre.
