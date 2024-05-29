@@ -15,5 +15,5 @@ mysql --user=root --skip-password --execute="CREATE DATABASE IF NOT EXISTS ruegg
 REM Importer le fichier dump SQL
 mysql --user=root --skip-password ruegg_thomas_expi1b_pappy_john < database\ruegg_thomas_expi1b_dump.sql
 
-echo Configuration terminee. Pressez sur Enter pour quitter.
-PAUSE
+REM exit
+exit
