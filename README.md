@@ -5,7 +5,6 @@ Cette application WEB permet d'avoir un suivi de ces commandes ainsi que de ces 
 ### Installer Laragon
 Voici le lien pour télécharger Laragon :
 [Laragon.exe](https://github.com/leokhoa/laragon/releases/download/6.0.0/laragon-wamp.exe)
-![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111297&authkey=%21AOoKIQG9pazW2G8&width=474&height=310)
 
 Une fois téléchargé, il faut exécuter l'exécutable.
 ![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111286&authkey=%21AD9rho5_rleqvb0&width=225&height=40)
