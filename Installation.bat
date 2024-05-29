@@ -7,11 +7,6 @@ echo Si non pressez sur Enter pour demarrer l'installation.
 
 PAUSE
 
-cd C:\
-
-REM Cloner l'application depuis Github
-git clone https://github.com/zk720kira/PappyJohn
-
 REM Naviguer vers le répertoire cloné
 cd C:\PappyJohn
 
