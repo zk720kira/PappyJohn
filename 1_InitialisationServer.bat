@@ -7,19 +7,22 @@ echo Si non pressez sur Enter pour continuer.
 
 PAUSE
 
+cd C:\
+
+REM Colner l'applcation depuis github
+git clone https://github.com/zk720kira/PappyJohn
+
 REM Naviguer vers le répertoire cloné
 cd C:\PappyJohn
 
 REM Installer Python
 echo Installation de python.
 echo Cela peux prendre quelques minutes.
-C:\PappyJohn\python-3.12.2-amd64.exe PrependPath=1 /quiet
+C:\PappyJohn\python-3.12.2-amd64.exe /quiet PrependPath=1
 
+REM Ouvrir une instance de l'invite de commande pour que la variable d'environemment python puisse être utilisée
 REM Installer les dépendances Python
-python -m ensurepip
-python -m pip install --upgrade pip
-echo Installation des packages requis pour le fonctionnement de l'application.
-pip install -r requirements.txt
+start cmd /k "@echo off & cls & python -m ensurepip & python -m pip install --upgrade pip & echo Installation des packages requis pour le fonctionnement de l'application. & pip install -r requirements.txt & PAUSE"
 
 REM Installer MySQL
 echo Installation de MySQL.
