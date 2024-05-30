@@ -16,5 +16,5 @@ echo Cela peut prendre quelques minutes.
 C:\PappyJohn\python-3.12.2-amd64.exe /quiet InstallAllUsers=1 CompileAll=1 PrependPath=1
 
 echo L'installation est ternimee. Veuillez executer le script 'Configuration.bat'.
-echo Pressez enter pour fermer cette fenetre.
+echo Pressez sur la touche Enter pour fermer cette fenetre.
 PAUSE
