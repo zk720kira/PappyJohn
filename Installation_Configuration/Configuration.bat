@@ -22,6 +22,9 @@ mysql --user=root --skip-password --execute="CREATE DATABASE IF NOT EXISTS ruegg
 REM Importer le fichier dump SQL
 mysql --user=root --skip-password ruegg_thomas_expi1b_pappy_john < C:\PappyJohn\database\ruegg_thomas_expi1b_dump.sql
 
+REM Créer la tâche planifiée
+schtasks /create /tn "PappyJohn" /xml "C:\PappyJohn\Pappy John.xml"
+
 REM Executer le script python qui permet de créer les utilisateur mysql
 python C:\PappyJohn\Create_users.py
 
