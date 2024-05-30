@@ -55,7 +55,7 @@ Une fois la command exécutée l'installation de Git commencera. Quand la barre 
 **L'instalation de Git est terminée**
 
 ### Installer l'application Flask
-Pour insteller l'application Flask il faut ouvrir une invite de commande et exécuter un script.
+Pour installer l'application Flask il faut ouvrir une invite de commande et exécuter un script.
 1) Appuyer sur le boutton Windows.
 2) Tapper ***'cmd'*** et appuyer sur la toucher Enter.
 3) Copier ce code : 
