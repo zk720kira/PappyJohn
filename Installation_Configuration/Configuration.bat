@@ -22,11 +22,14 @@ mysql --user=root --skip-password --execute="CREATE DATABASE IF NOT EXISTS ruegg
 REM Importer le fichier dump SQL
 mysql --user=root --skip-password ruegg_thomas_expi1b_pappy_john < C:\PappyJohn\database\ruegg_thomas_expi1b_dump.sql
 
-REM Créer la tâche planifiée
-schtasks /create /tn "PappyJohn" /xml "C:\PappyJohn\Pappy John.xml"
-
 REM Executer le script python qui permet de créer les utilisateur mysql
 python C:\PappyJohn\Create_users.py
+
+REM Ajouter le raccourcis pour l'application Flask (127.0.0.1:8000) sur le bureau
+copy "C:\PappyJohn\Pappy John.url" %userprofile%\Desktop
+
+REM Créer la tâche planifiée
+schtasks /create /tn "PappyJohn" /xml "C:\PappyJohn\Pappy John.xml"
 
 REM Se déplacer dans le System32 pour que la variable d'environnement puisse être ajoutée
 cd C:\Windows\System32
