@@ -6,6 +6,7 @@ Cette application WEB permet d'avoir un suivi de ces commandes ainsi que de ces 
 - Configuration de Laragon.
 - Installation de Git.
 - Installation de l'application Flask.
+- Utiliser l'application Flask.
 ### Installer Laragon
 Voici le lien pour télécharger Laragon :
 [Laragon.exe](https://github.com/leokhoa/laragon/releases/download/6.0.0/laragon-wamp.exe)
@@ -32,7 +33,7 @@ Vous devrez arriver sur cette page :
 ![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111292&authkey=%21AAKaa8cdtZQYvBE&width=1006&height=668)
 1) Lorsque vous êtes sur cette page il faut appyer sur l'engrenage en haut à droite.
 ![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111293&authkey=%21AEh8FZ52GftYb9c&width=1002&height=661)
-2) Dans l'onglet qui souvre il faut contrôler que toutes les cases soient cochées, si ce n'est pas le cas il faut toutes les cocher.
+2) Dans l'onglet qui souvre il faut contrôler que les 2 dernières cases soient cochées, si ce n'est pas le cas il faut les cocher.
 ![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111294&authkey=%21ADkbHSNsviWsLpw&width=790&height=662)
 3) Une fois que c'est fait vous pouvez appuyer sur la croix puis sur "Démarrer".
 ![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111295&authkey=%21AGQjqdWb79Ulzus&width=1002&height=669)
@@ -77,3 +78,6 @@ exit
 ![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111303&authkey=%21AIzRCIuuf62mPkc&width=1433&height=344)
 8) Une fois ce dernier script exécuté vous pouvez fermer toutes les invites de commandes soit en cliquant dessus et appuyant sur Enter soit avec la crois en haut à droite de la fenêtre. Vous pouvez aussi fermer l'explorateur de fichier. \
 **L'installation est completement terminée.**
+
+# Utilisation
+### Utiliser l'application Flask
