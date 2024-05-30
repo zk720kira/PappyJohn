@@ -24,7 +24,7 @@ REM Se déplacer dans le System32 pour que la variable d'environnement puisse ê
 cd C:\Windows\System32
 
 REM Ajouter mysql à la variable d'environement PATH du système
-setx /M PATH "%PATH%;C:\laragon\bin\mysql\mysql-8.0.30-winx64\bin
+setx /M PATH "%PATH%";C:\laragon\bin\mysql\mysql-8.0.30-winx64\bin
 
 echo L'installation est ternimee. Veuillez executer le script 'Configuration.bat'.
 echo Pressez enter pour fermer cette fenetre.
