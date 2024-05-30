@@ -15,17 +15,6 @@ echo Installation de Python.
 echo Cela peut prendre quelques minutes.
 C:\PappyJohn\python-3.12.2-amd64.exe /quiet InstallAllUsers=1 CompileAll=1 PrependPath=1
 
-REM Installer MySQL
-REM echo Installation de MySQL.
-REM echo Cela peut prendre quelques minutes.
-REM winget install Oracle.MySQL --silent
-
-REM Se déplacer dans le System32 pour que la variable d'environnement puisse être ajoutée
-cd C:\Windows\System32
-
-REM Ajouter mysql à la variable d'environement PATH du système
-setx /M PATH "%PATH%";C:\laragon\bin\mysql\mysql-8.0.30-winx64\bin
-
 echo L'installation est ternimee. Veuillez executer le script 'Configuration.bat'.
 echo Pressez enter pour fermer cette fenetre.
 PAUSE
