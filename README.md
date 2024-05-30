@@ -46,11 +46,11 @@ Une fois télécharché il faut exécuter une commande dans une invite de comman
 1) Appuyer sur la touce Windows.
 2) Tapper cmd et cliquer sur *'exécuter en tant qu'administrateur'*.
 ![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111300&authkey=%21AC6fLN-siTrca_Q&width=782&height=636)
-4) Copier la commande ci-dessous et coller la dans l'invite de commande :
+3) Copier la commande ci-dessous et coller la dans l'invite de commande :
 ```batch=
 "%USERPROFILE%\Downloads\Git-2.45.1-64-bit.exe" /silent
 ```
-5) Appuyer sur la touche Enter si la commande ne c'est pas exécutée.
+4) Appuyer sur la touche Enter si la commande ne c'est pas exécutée.
 Une fois la command exécutée l'installation de Git commencera. Quand la barre de progression sera pleine la fenêtre se fermera, à ce moment vous pourrez fermer l'invite de commande en cliquant sur la croix en haut à droite. \
 **L'instalation de Git est terminée**
 
@@ -81,3 +81,10 @@ exit
 
 # Utilisation
 ### Utiliser l'application Flask
+Pour utiliser l'application Flask il faut dabord que Laragon soit démarré ainsi que tous ces services. Une fois Laragon démarré il faut se rendre sur un navigateur et entrer ***'http://127.0.0.1:8000'*** dans la barre URL. \
+Dans le script de configuration (Configuration.bat) tous le lancement de l'application à été automatisé au démarrage de votre ordinateur. \
+Un raccourcià aussi été ajouté sur le bureau, il vous ouvre automatiquement le navigateur sur l'application Flaks. \
+![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111315&authkey=%21AKeZIypMT5e2_qU&width=138&height=100) \
+**Ce raccourcis ne démarre pas Laragon"** si vous voulez le démarrer manuellement il faut appuyer sur la touche windows, tapper *'Laragon'* et appuyer sur la touche Enter. \
+Pour vérifier qu'il soit bien démarrer si vous appuyer sur la flèche en bas à gauche de l'écran (Windows 10) il faut qu'il y ait le même carré que sur l'image ci-dessous. (Windows 11) ce carré doit être à côté de la flèche. \
+![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111316&authkey=%21ANyfYrzfeGOALbU&width=389&height=92)
