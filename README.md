@@ -33,7 +33,7 @@ Vous devrez arriver sur cette page :
 ![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111292&authkey=%21AAKaa8cdtZQYvBE&width=1006&height=668)
 1) Lorsque vous êtes sur cette page il faut appyer sur l'engrenage en haut à droite.
 ![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111293&authkey=%21AEh8FZ52GftYb9c&width=1002&height=661)
-2) Dans l'onglet qui souvre il faut contrôler que les 2 dernières cases soient cochées, si ce n'est pas le cas il faut les cocher.
+2) Dans l'onglet qui souvre il faut contrôler que les 2 dernières cases soient cochées, si ce n'est pas le cas il faut les cocher. Il faut aussi décocher la 1ère case si elle est cochée.
 ![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111314&authkey=%21APDEF-syo0TucU8&width=793&height=667)
 3) Une fois que c'est fait vous pouvez appuyer sur la croix puis sur "Démarrer".
 ![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111295&authkey=%21AGQjqdWb79Ulzus&width=1002&height=669)
