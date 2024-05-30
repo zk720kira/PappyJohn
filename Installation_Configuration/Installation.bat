@@ -1,7 +1,7 @@
 @echo off
 cls
 
-echo Des installation sont effectuees dans ce script. Veuillez l'ouvrir en Administrateur.
+echo Des installations sont effectuees dans ce script. Veuillez l'ouvrir en Administrateur.
 echo Si vous n'etes pas en Administrateur veuillez fermer cette fenetre et relancer le script en Administrateur.
 echo Si non pressez sur Enter pour demarrer l'installation.
 
@@ -13,7 +13,7 @@ cd C:\PappyJohn
 REM Installer Python
 echo Installation de Python.
 echo Cela peut prendre quelques minutes.
-C:\PappyJohn\python-3.12.2-amd64.exe PrependPath=1 /quiet
+C:\PappyJohn\python-3.12.2-amd64.exe /quiet InstallAllUsers=1 CompileAll=1 PrependPath=1
 
 REM Installer MySQL
 REM echo Installation de MySQL.
