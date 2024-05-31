@@ -28,7 +28,7 @@ REM Executer le script python qui permet de créer les utilisateur mysql
 python C:\PappyJohn\Create_users.py
 
 REM Ajouter le raccourcis pour l'application Flask (127.0.0.1:8000) sur le bureau
-copy "C:\PappyJohn\Pappy John.url" %userprofile%\Desktop
+copy "C:\PappyJohn\Pappy John.url" "%userprofile%\Desktop\Pappy John.url"
 
 REM Créer la tâche planifiée
 schtasks /create /tn "PappyJohn" /xml "C:\PappyJohn\Pappy John.xml"
