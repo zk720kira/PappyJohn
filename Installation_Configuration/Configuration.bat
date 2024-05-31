@@ -22,7 +22,7 @@ REM Créer la base de données
 mysql --user=root --skip-password --execute="CREATE DATABASE IF NOT EXISTS ruegg_thomas_expi1b_pappy_john"
 
 REM Importer le fichier dump SQL
-mysql --user=root --skip-password ruegg_thomas_expi1b_pappy_john < C:\PappyJohn\database\ruegg_thomas_expi1b_dump.sql
+mysql --user=root --skip-password ruegg_thomas_expi1b_pappy_john < "C:\PappyJohn\database\ruegg_thomas_expi1b_dump.sql"
 
 REM Executer le script python qui permet de créer les utilisateur mysql
 python C:\PappyJohn\Create_users.py
