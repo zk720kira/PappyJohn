@@ -5,6 +5,8 @@ echo Les configurations effectuees dans ce script demande des acces Administrate
 echo Si vous n'etes pas en Administrateur, veuillez fermer cette fenetre et relancer le script en Administrateur.
 echo Si non vous pouvez appuyer sur la touche Enter pour commencer la configuration.
 
+PAUSE
+
 cd C:\PappyJohn
 
 REM Installer les dépendances Python
