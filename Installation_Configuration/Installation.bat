@@ -15,8 +15,6 @@ echo Installation de Python.
 echo Cela peut prendre quelques minutes.
 C:\PappyJohn\python-3.12.2-amd64.exe /quiet InstallAllUsers=1 CompileAll=1 PrependPath=1
 
-C:\PappyJohn\Installation_Configuration\ENV_mysql.bat
-
 echo L'installation est ternimee. Veuillez executer le script 'ENV_mysql.bat'.
 echo Pressez sur la touche Enter pour fermer cette fenetre.
 PAUSE
