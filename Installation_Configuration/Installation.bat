@@ -17,6 +17,6 @@ C:\PappyJohn\python-3.12.2-amd64.exe /quiet InstallAllUsers=1 CompileAll=1 Prepe
 
 C:\PappyJohn\Installation_Configuration\ENV_mysql.bat
 
-echo L'installation est ternimee. Veuillez executer le script 'Configuration.bat'.
+echo L'installation est ternimee. Veuillez executer le script 'ENV_mysql.bat'.
 echo Pressez sur la touche Enter pour fermer cette fenetre.
 PAUSE
