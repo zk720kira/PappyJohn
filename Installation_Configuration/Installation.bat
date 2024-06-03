@@ -20,7 +20,13 @@ cd C:\Windows\System32
 
 REM Ajouter mysql à la variable d'environement PATH du système
 REM Les variables d'environnement python doivent être réajoutées
-setx PATH "%PATH%;C:\Program Files\Python312\Scripts\;C:\Program Files\Python312\;C:\laragon\bin\mysql\mysql-8.0.30-winx64\bin" /M
+setlocal enabledelayedexpansion
+
+rem Stocker la valeur actuelle de PATH
+set "OLD_PATH=%PATH%"
+
+rem Définir la nouvelle valeur de PATH
+setx PATH "C:\Program Files\Python312\Scripts\;C:\Program Files\Python312\;%OLD_PATH%;C:\laragon\bin\mysql\mysql-8.0.30-winx64\bin" /M
 
 echo La configuration est ternimee. Veuillez executer le script 'Configuration.bat'.
 echo Pressez sur la touche Enter pour fermer cette fenetre.
