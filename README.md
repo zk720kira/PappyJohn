@@ -6,7 +6,7 @@ Cette application WEB permet d'avoir un suivi de ces commandes ainsi que de ces 
 - Configuration de Laragon.
 - Installation de Git.
 - Installation de l'application Flask.
-- Utiliser l'application Flask.
+- Démarrer manuellement l'application Flask
 ### Installer Laragon
 Voici le lien pour télécharger Laragon :
 [Laragon.exe](https://github.com/leokhoa/laragon/releases/download/6.0.0/laragon-wamp.exe)
@@ -80,7 +80,7 @@ exit
 **L'installation est completement terminée.**
 
 # Utilisation
-### Démarrer manuellement l'application Flaks
+### Démarrer manuellement l'application Flask
 Pour utiliser l'application Flask il faut dabord que Laragon soit démarré ainsi que tous ces services. Une fois Laragon démarré il faut ouvrir un terminal et exécuter cette commande pour démarrer l'application Flask :
 ```batch=
 @echo off
