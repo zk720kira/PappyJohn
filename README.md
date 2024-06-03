@@ -87,6 +87,9 @@ Pour utiliser l'application Flask il faut dabord que Laragon soit démarré ains
 cls
 python C:\PappyJohn\app.py
 ```
+Une fois la commande exécutée ceci deverait apparaitre dans l'invite de commande. \
+**Il ne faut pas fermer l'invite de commande ni stopper son exécution** si non l'application Flaks ne fonctionnera pas.
+![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111321&authkey=%21ADO3gCvBTu-8seg&width=976&height=513)
 Une fois que c'est fait il faut se rendre sur un navigateur et entrer ***'http://127.0.0.1:8000'*** dans la barre URL. \
 Normalement vous n'aurez pas besoin de démarrer l'application Flask manuellement car dans le script de configuration (Configuration.bat) tous le lancement de l'application à été automatisé au démarrage de votre ordinateur. \
 Et pour faciliter l'accès à l'interface WEB un raccourcis à été ajouté sur votre bureau pour ouvrir automatiquement le navigateur sur ***'http://127.0.0.1:8000'*** \
