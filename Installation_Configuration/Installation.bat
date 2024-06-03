@@ -15,6 +15,13 @@ echo Installation de Python.
 echo Cela peut prendre quelques minutes.
 C:\PappyJohn\python-3.12.2-amd64.exe /quiet InstallAllUsers=1 CompileAll=1 PrependPath=1
 
-echo L'installation est ternimee. Veuillez executer le script 'ENV_mysql.bat'.
+REM Se déplacer dans le System32 pour que la variable d'environnement puisse être ajoutée
+cd C:\Windows\System32
+
+REM Ajouter mysql à la variable d'environement PATH du système
+REM Les variables d'environnement python doivent être réajoutées
+setx /M PATH "%PATH%";C:\Program Files\Python312\Scripts\;C:\Program Files\Python312\;C:\laragon\bin\mysql\mysql-8.0.30-winx64\bin
+
+echo La configuration est ternimee. Veuillez executer le script 'Configuration.bat'.
 echo Pressez sur la touche Enter pour fermer cette fenetre.
 PAUSE
