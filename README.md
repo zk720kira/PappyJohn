@@ -89,7 +89,7 @@ python C:\PappyJohn\app.py
 ```
 Une fois que c'est fait il faut se rendre sur un navigateur et entrer ***'http://127.0.0.1:8000'*** dans la barre URL. \
 Normalement vous n'aurez pas besoin de démarrer l'application Flask manuellement car dans le script de configuration (Configuration.bat) tous le lancement de l'application à été automatisé au démarrage de votre ordinateur. \
-Et pour faciliter l'accès à l'interface WEB un raccourcis à été ajouté sur votre bureau pour ouvrir automatiquement le navigateur sur ***'http://127.0.0.1'*** \
+Et pour faciliter l'accès à l'interface WEB un raccourcis à été ajouté sur votre bureau pour ouvrir automatiquement le navigateur sur ***'http://127.0.0.1:8000'*** \
 ![](https://onedrive.live.com/embed?resid=E1FF9285CB4A211C%2111315&authkey=%21AKeZIypMT5e2_qU&width=138&height=100) \
 **Ce raccourcis ne démarre pas Laragon"** si vous voulez le démarrer manuellement il faut appuyer sur la touche windows, tapper *'Laragon'* et appuyer sur la touche Enter. \
 Pour vérifier qu'il soit bien démarrer si vous appuyer sur la flèche en bas à gauche de l'écran (Windows 10) il faut qu'il y ait le même carré que sur l'image ci-dessous. (Windows 11) ce carré doit être à côté de la flèche. \
