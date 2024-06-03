@@ -2,11 +2,11 @@
 Cette application WEB permet d'avoir un suivi de ces commandes ainsi que de ces fournisseurs.
 
 # Installation
-- Installation de Laragon.
-- Configuration de Laragon.
-- Installation de Git.
-- Installation de l'application Flask.
-- Démarrer manuellement l'application Flask
+- [Installation de Laragon.](#Installer-Laragon)
+- [Configuration de Laragon.](#Configurer-Laragon)
+- [Installation de Git.](#Installer-Git)
+- [Installation de l'application Flask.](#Installer-l'application-Flask)
+- [Démarrer manuellement l'application Flask.](#Démarrer-manuellement-l'application-Flask)
 ### Installer Laragon
 Voici le lien pour télécharger Laragon :
 [Laragon.exe](https://github.com/leokhoa/laragon/releases/download/6.0.0/laragon-wamp.exe)
