@@ -92,7 +92,7 @@ def afficher_donnees():
     try:
         # Récupérer les fournisseurs éxistant pour la liste déroulante dans l'intérface de modification des commandes
         cursor.execute("""
-                        SELECT DISTINCT FournNom_fournisseur FROM tblfournisseur
+                        SELECT DISTINCT FournNom_fournisseur FROM tblfournisseur;
                         """)
         fournisseur_data = cursor.fetchall()
     except Exception as e2:
