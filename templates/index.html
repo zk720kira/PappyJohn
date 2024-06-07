@@ -100,12 +100,19 @@
             </div>
             <table id="tbl_fourn">
                 <tr class="tr_fourn">
-                    <th>Nom</th><th>Domaine de vente</th><th>No. téléphone</th><th>E-mail</th><th>Modifier</th><th>Supprimer</th>
+                    <th class="indexfrn0">Nom</th>
+                    <th class="indexfrn1">Id Fournisseur</th>
+                    <th class="indexfrn2">Id Contact</th>
+                    <th class="indexfrn3">Domaine de vente</th>
+                    <th class="indexfrn4">No. téléphone</th>
+                    <th class="indexfrn5">E-mail</th>
+                    <th class="indexfrn6">Modifier</th>
+                    <th class="indexfrn7">Supprimer</th>
                 </tr>
                 {% for row in fournisseur %}
                     <tr class="tr_fourn">
                         {% for item in row %}
-                            <td>{{ item }}</td>
+                            <td class="indexfrn{{ loop.index0 }}">{{ item }}</td>
                         {% endfor %}
                         <form method="post">
                             <td class="action_td" class="td_fourn">

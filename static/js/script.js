@@ -41,6 +41,7 @@ window.onload = function() {
     replaceEmptyCellulesCommandes(); // Appeler la fonction pour remplacer les cellules contenant "None" par "Pas de données"
     replaceEmptyCellulesFourn(); // Appler la fonction pour remplacer les cellules contenant "None" par "Pas de données"
     checkStripedTable();
+    localStorage.setItem("striped", "False");
     showRow1();
     showRow2();
     showRow3();
@@ -331,33 +332,35 @@ function sendDataToFlask(id_commande, id_fourn, id_article, action) {
 function getUpdateFourn(event) {
     event.preventDefault();
     let content = event.target.closest('tr').querySelector('td:first-child').innerText;
-    let email =  event.target.closest('tr').querySelector('td:nth-child(4)').innerText;
-    // console.log(content, email, 'update') // --> Pour du débug
-    sendDataToFlaskFourn(content, email, 'update')
+    let id_fournisseur = event.target.closest('tr').querySelector('td:nth-child(2)').innerText;
+    let id_contact = event.target.closest('tr').querySelector('td:nth-child(3)').innerText;
+    // console.log(content, id_fournisseur, id_contact, 'update') // --> Pour du débug
+    sendDataToFlaskFourn(id_fournisseur, id_contact, 'update')
 }
 
 // Récupérer le nom du fournisseur pour le sélectionner et ensuite fair un DELETE
 function getDeleteFourn(event) {
     event.preventDefault();
     let content = event.target.closest('tr').querySelector('td:first-child').innerText;
-    let email =  event.target.closest('tr').querySelector('td:nth-child(4)').innerText;
-    // console.log(content, email) // --> Pour du débug
+    let id_fournisseur = event.target.closest('tr').querySelector('td:nth-child(2)').innerText;
+    let id_contact = event.target.closest('tr').querySelector('td:nth-child(3)').innerText;
+    // console.log(content, id_fournisseur, id_contacts, 'delete') // --> Pour du débug
     // Demander à l'utilisateur s'il veut vraiment supprimer le fournisseur
     if(confirm("Le fournisseur : '" + content + "' sera supprimé, voulez-vous vraiment continuer ?") === true) {
-        sendDataToFlaskFourn(content, email, 'delete')
+        sendDataToFlaskFourn(id_fournisseur, id_contact, 'delete')
     } else {
         // console.log("La suppression du fournisseur : '" + content + "' à été annulée !") // --> Pour du débug
     }
 }
 
 // Envoyer la requête au Flask et gérer le retour du Flask pour les fournisseurs
-function sendDataToFlaskFourn(content, email, action) {
+function sendDataToFlaskFourn(id_fournisseur, id_contact, action) {
     fetch('/handle_action_fourn', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({content: content, email: email, action: action})
+        body: JSON.stringify({id_fournisseur: id_fournisseur, id_contact: id_contact, action: action})
     })
     .then(response => {
         if (response.ok) {

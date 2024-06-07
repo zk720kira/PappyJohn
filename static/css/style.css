@@ -199,6 +199,11 @@ li a {
   display: none;
 }*/
 
+/* Cacher la colonne de ID pour les fournisseurs */
+.indexfrn1, .indexfrn2 {
+  display: none;
+}
+
 #btn_settings {
   padding-bottom: 10px;
   margin-left: 30px;

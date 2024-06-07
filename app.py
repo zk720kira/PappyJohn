@@ -102,7 +102,7 @@ def afficher_donnees():
     try:
         # Récupérer les données sur les fournisseurs
         cursor.execute("""
-                           SELECT DISTINCT fourn.FournNom_fournisseur, fourn.Fourn_domaine_vente, cont.ContNo_telephone,
+                           SELECT DISTINCT fourn.FournNom_fournisseur, fourn.Id_Fourn, cont.Id_contact, fourn.Fourn_domaine_vente, cont.ContNo_telephone,
                            cont.ContMail
                            FROM tblfournisseur AS fourn
                            INNER JOIN tblfourn_cont AS fc
@@ -194,7 +194,7 @@ def insert_data():
 
 # Route pour insérer des nouveaux fournisseurs
 @app.route("/insert_data_fournisseur", methods=['POST'])
-# Fonction pour insérer des nouveau fournisseurs
+# Fonction pour insérer des nouveaux fournisseurs
 def insert_data_fournisseur():
     # Si la request method est POST
     if request.method == 'POST':
@@ -437,7 +437,7 @@ def modifier_commandes():
             fournisseurs_update = ("""
                                     UPDATE tblcmd_fourn
                                     SET Fk_Fourn = %s
-                                    WHERE Fk_Cmd = %s
+                                    WHERE Fk_Cmd = %s;
                                     """)
             cursor.execute(fournisseurs_update, (id_selected_fourn, id_commande))
 
@@ -458,8 +458,8 @@ def modifier_commandes():
 def handle_action_fourn():
     # Récupérer les données envoyés par le JSON
     data = request.get_json()
-    content = data.get('content')  # Nom du fournisseur
-    email = data.get('email')  # Email
+    id_fournisseur = data.get('id_fournisseur')  # Id du fournisseur
+    id_contact = data.get('id_contact')  # Id du contact
     action = data.get('action')  # Action à effectuer
 
     try:
@@ -477,8 +477,8 @@ def handle_action_fourn():
                                 SELECT COUNT(*) FROM tblcmd_fourn AS CF
                                 INNER JOIN tblfournisseur AS fourn
                                 ON CF.Fk_Fourn = fourn.Id_Fourn
-                                WHERE fourn.FournNom_fournisseur = %s;
-                                """, (content,))
+                                WHERE fourn.Id_Fourn = %s;
+                                """, (id_fournisseur,))
                 use = cursor.fetchone()[0]
                 if use != 0:
                     return jsonify({'message': '001'}), 200  # Erreur, car le fournisseur est lié à une commande
@@ -493,9 +493,9 @@ def handle_action_fourn():
                             FROM tblfournisseur AS fourn
                             JOIN tblfourn_cont AS FC ON fourn.Id_Fourn = FC.Fk_Fourn
                             JOIN tblcontact AS cont ON FC.Fk_Cont = cont.Id_contact
-                            WHERE FournNom_fournisseur = %s AND cont.ContMail = %s;
+                            WHERE fourn.Id_Fourn = %s AND cont.Id_contact = %s;
                             """)
-                cursor.execute(move, (content, email))
+                cursor.execute(move, (id_fournisseur, id_contact))
 
                 # Supprimer les données une fois qu'elles ont été déplacé dans la table "poubelle"
                 remove = ("""
@@ -503,9 +503,9 @@ def handle_action_fourn():
                             FROM tblfournisseur AS fourn
                             JOIN tblfourn_cont AS FC ON fourn.Id_Fourn = FC.Fk_Fourn
                             JOIN tblcontact AS cont ON FC.Fk_Cont = cont.Id_contact
-                            WHERE FournNom_fournisseur = %s AND cont.ContMail = %s;
+                            WHERE fourn.Id_Fourn = %s AND cont.Id_contact = %s;
                             """)
-                cursor.execute(remove, (content, email))
+                cursor.execute(remove, (id_fournisseur, id_contact))
 
                 # Réactiver les contraintes de clé étrangère
                 cursor.execute("SET FOREIGN_KEY_CHECKS = 1")
@@ -527,12 +527,12 @@ def handle_action_fourn():
                                 SELECT Id_Fourn FROM tblfournisseur AS fourn
                                 INNER JOIN tblfourn_cont AS FC ON fourn.Id_Fourn = FC.Fk_Fourn
                                 INNER JOIN tblcontact AS cont ON FC.Fk_Cont = cont.Id_contact
-                                WHERE fourn.FournNom_fournisseur = %s AND cont.ContMail = %s
-                                 """, (content, email))
-                id_fournisseur = cursor.fetchall()
+                                WHERE fourn.Id_Fourn = %s AND cont.Id_contact = %s
+                                 """, (id_fournisseur, id_contact))
+                id_fourn = cursor.fetchall()
 
                 # Stocker id_fournisseur dans la session Flask
-                session['id_fournisseur'] = id_fournisseur
+                session['id_fourn'] = id_fourn
 
                 # Récupérer les types de données des colonnes pour pouvoir ensuite adapter le type des inputs qui seront dans l'interface de modification par apport au type de données
                 cursor.execute("""
@@ -599,7 +599,7 @@ def modifier_fournisseur():
         no_telephone = request.form['ContNo_telephone']  # Numéro de téléphone
         email = request.form['ContMail']  # Email
         # Récupérer les données dans la session FLASK
-        id_fournisseur = session.get('id_fournisseur')  # Id du fournisseur qui à été séléctionné pour la modification
+        id_fourn = session.get('id_fourn')  # Id du fournisseur qui à été séléctionné pour la modification
 
         # Connexion à la base de données via des variables d'environnements
         connection = pymysql.connect(host=os.getenv("DB_HOST"),
@@ -615,8 +615,8 @@ def modifier_fournisseur():
                             FROM tblcontact AS cont
                             INNER JOIN tblfourn_cont AS FC ON cont.Id_contact = FC.Fk_Cont
                             INNER JOIN tblfournisseur AS fourn ON FC.Fk_Fourn = fourn.Id_Fourn
-                            WHERE fourn.Id_Fourn = %s
-                            """, (id_fournisseur,))
+                            WHERE fourn.Id_Fourn = %s;
+                            """, (id_fourn,))
             row = cursor.fetchone()
             id_contact = row[0]
 
@@ -624,15 +624,15 @@ def modifier_fournisseur():
             tblfournisseur_update = ("""
                                     UPDATE tblfournisseur
                                     SET FournNom_fournisseur = %s, Fourn_domaine_vente = %s
-                                    WHERE Id_Fourn = %s
+                                    WHERE Id_Fourn = %s;
                                     """)
-            cursor.execute(tblfournisseur_update, (nom_fournisseur, domaine_vente, id_fournisseur))
+            cursor.execute(tblfournisseur_update, (nom_fournisseur, domaine_vente, id_fourn))
 
             # Requête pour faire un update sur la table tblcontact
             tblcontact_update = ("""
                                 UPDATE tblcontact
                                 SET ContNo_telephone = %s, ContMail = %s
-                                WHERE Id_contact = %s
+                                WHERE Id_contact = %s;
                                 """)
             cursor.execute(tblcontact_update, (no_telephone, email, id_contact))
 
@@ -703,7 +703,7 @@ def back_cmd_remove():
                                         SELECT sa.SALiaison_fournisseur
                                         FROM tblsarlacc1 AS sa
                                         WHERE sa.Id_sarlacc = %s
-                                    ));     
+                                    ));
                                     """)
                 cursor.execute(move_tblcmdfourn, (commande_id, last_id))
 
