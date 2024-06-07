@@ -31,7 +31,9 @@ INSERT INTO tblarticle(ArtArticle, ArtVariante, ArtQuantite,
 INSERT INTO tblcommande(CmdNo_Commande, CmdPers_passe_Cmd, CmdStatus, CmdCommande_le,
                             CmdRecu_le, CmdRemarque) VALUES (150, 'Testeur', 'En cours de test', '2000-12-31', '2001-12-31', 'Trop de retard ! Demander un rembourssement !');  /*Ces données sont uniquement insérées pour de la démonstration !*/
 
-SELECT Id_Fourn FROM tblfournisseur WHERE FournNom_fournisseur = 'Module 164');  /* Les données seléctionnées sont pour de la démonstration, il est possible quu la séléction ne fonctionne pas si les données ont été modifié. Si c'est le cas il faut à nouveau exécuter le dump.sql.*/
+SELECT Id_Fourn FROM tblfournisseur WHERE FournNom_fournisseur = 'Module 164';  /* Les données seléctionnées sont pour de la démonstration, il est possible quu la séléction ne fonctionne pas si les données ont été modifié. Si c'est le cas il faut à nouveau exécuter le dump.sql.*/
+
+SET FOREIGN_KEY_CHECKS = 0;
 
 INSERT INTO tblcmd_fourn(Fk_Cmd, Fk_Fourn) VALUES (143, 50);  /*Ces données sont uniquement insérée pour de la démonstration !*/
 
@@ -42,8 +44,6 @@ INSERT INTO tblfournisseur(FournNom_fournisseur, Fourn_domaine_vente) VALUES ('t
 INSERT INTO tblcontact(ContNo_telephone, ContMail) VALUES ('+41 78 983 25 89', 'test164@gmail.com');  /*Ces données sont uniquement insérées pour de la démonstration !*/
 
 INSERT INTO tblfourn_cont(Fk_Fourn, Fk_cont) VALUES (40, 40);  /*Ces données sont uniquement insérées pour de la démonstration !*/
-
-SET FOREIGN_KEY_CHECKS = 0;
 
 INSERT INTO tblsarlacc1 (SANo_commande, SAArticle, SAVariante, SAQuantite, SACommande_par,
 						SAStatut, SACommande_le, SARecu_le, SARemarque,
@@ -66,7 +66,7 @@ WHERE cmd.Id_commande = 184;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
-SELECT 
+SELECT
 	c.COLUMN_NAME,
 	c.DATA_TYPE
 FROM
@@ -95,7 +95,7 @@ INNER JOIN tblfournisseur AS fourn
 ON cf.Fk_Fourn = fourn.Id_Fourn
 WHERE cmd.Id_commande = 143;  /* Les données seléctionnées sont pour de la démonstration, il est possible quu la séléction ne fonctionne pas si les données ont été modifié. Si c'est le cas il faut à nouveau exécuter le dump.sql.*/
 
-SELECT Id_Fourn FROM tblfournisseur WHERE FournNom_fournisseur = 46);  /* Les données seléctionnées sont pour de la démonstration, il est possible quu la séléction ne fonctionne pas si les données ont été modifié. Si c'est le cas il faut à nouveau exécuter le dump.sql.*/
+SELECT Id_Fourn FROM tblfournisseur WHERE FournNom_fournisseur = 'Test2';  /* Les données seléctionnées sont pour de la démonstration, il est possible quu la séléction ne fonctionne pas si les données ont été modifié. Si c'est le cas il faut à nouveau exécuter le dump.sql.*/
 
 UPDATE tblcommande
 SET CmdNo_Commande = 10, CmdPers_passe_Cmd = 'Patron', CmdStatus = 'Arrivé',
@@ -135,7 +135,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 SELECT Id_Fourn FROM tblfournisseur AS fourn
 INNER JOIN tblfourn_cont AS FC ON fourn.Id_Fourn = FC.Fk_Fourn
 INNER JOIN tblcontact AS cont ON FC.Fk_Cont = cont.Id_contact
-WHERE fourn.Id_Fourn = 50 AND cont.Id_contact = 50;  /* Les données seléctionnées sont pour de la démonstration, il est possible quu la séléction ne fonctionne pas si les données ont été modifié. Si c'est le cas il faut à nouveau exécuter le dump.sql.*/
+WHERE fourn.Id_Fourn = 54 AND cont.Id_contact = 54;  /* Les données seléctionnées sont pour de la démonstration, il est possible quu la séléction ne fonctionne pas si les données ont été modifié. Si c'est le cas il faut à nouveau exécuter le dump.sql.*/
  
 SELECT 
 	c.COLUMN_NAME,
@@ -193,8 +193,6 @@ VALUES (396, (
 	WHERE sa.Id_sarlacc = 96
 ));  /*Ces données sont uniquement insérée pour de la démonstration !*/
 
-SET FOREIGN_KEY_CHECKS = 1;
-
 INSERT INTO tblcmd_art (Fk_Cmd, Fk_Art)
 VALUES(396, 498);  /*Ces données sont uniquement insérée pour de la démonstration !*/
 
@@ -220,5 +218,7 @@ VALUES(890, 890);  /*Ces données sont uniquement insérée pour de la démonstr
 DELETE SA
 FROM tblsarlacc2 AS SA
 WHERE Id_sarlacc = 30;
+
+SET FOREIGN_KEY_CHECKS = 1;
 
 /*En cas d'erreur il faut à nouveau importer le dump.sql*/
