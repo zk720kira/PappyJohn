@@ -229,7 +229,7 @@
                 <p>Table zèbrée :<button id="btn_modal_settings" class="btn_modal_settings" onclick="StripedTable()">Activer</button></p>
                 <p>Afficher/Masquer des colonnes :
                     <button class="btn_modal_settings" id="btn_modal_settings_show" onclick="openModalShow()">Onglet Commande</button>
-                    <button class="btn_modal_settings" id="btn_modal_settings_show_fourn">Onglet Fournisseur</button>
+                    <button class="btn_modal_settings" id="btn_modal_settings_show_fourn" onclick="openModalShowfrn()">Onglet Fournisseur</button>
                 </p>
             </div>
         </div>
@@ -298,6 +298,42 @@
                         <div class="content_align">
                             <p>No. Article :</p>
                             <input type="checkbox" checked id="input13" onclick="showRow13()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Popup afficher/masquer les colonnes dans la table des fournisseurs-->
+        <div id="modal_showfrn" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModalShowfrn()">&#x1F5D9;</span>
+                <div id="div_showfrn_table">
+                    <div class="show_table">
+                        <div class="content_align">
+                            <p>Nom :</p>
+                            <input type="checkbox" class="input_show_table" checked id="inputfrn0" onclick="showfrnRow0()">
+                        </div>
+                        <div class="content_align">
+                            <p>Id Fournisseur :</p>
+                            <input type="checkbox" class="input_show_table" id="inputfrn1" onclick="showfrnRow1()">
+                        </div>
+                        <div class="content_align">
+                            <p>Id Contact :</p>
+                            <input type="checkbox" class="input_show_table" id="inputfrn2" onclick="showfrnRow2()">
+                        </div>
+                        <div class="content_align">
+                            <p>Domaine vente :</p>
+                            <input type="checkbox" checked class="input_show_table" id="inputfrn3" onclick="showfrnRow3()">
+                        </div>
+                        <div class="content_align">
+                            <p>No. téléphone :</p>
+                            <input type="checkbox" checked id="inputfrn4" onclick="showfrnRow4()">
+                        </div>
+                    </div>
+                    <div class="show_table">
+                        <div class="content_align">
+                            <p>E-mail :</p>
+                            <input type="checkbox" class="input_show_table" checked id="inputfrn5" onclick="showfrnRow5()">
                         </div>
                     </div>
                 </div>

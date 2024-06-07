@@ -199,10 +199,10 @@ li a {
   display: none;
 }*/
 
-/* Cacher la colonne de ID pour les fournisseurs */
+/* Cacher la colonne de ID pour les fournisseurs
 .indexfrn1, .indexfrn2 {
   display: none;
-}
+}*/
 
 #btn_settings {
   padding-bottom: 10px;
@@ -255,4 +255,11 @@ li a {
 
 #btn_modal_settings_show_fourn {
   color: black;
+}
+
+#div_showfrn_table {
+  background-color: #d2d2d2;
+  border-radius: 30px;
+  margin: 0 0 0 0;
+  padding: 0 20% 0 20%;
 }

@@ -55,6 +55,12 @@ window.onload = function() {
     showRow11();
     showRow12();
     showRow13();
+    showfrnRow0();
+    showfrnRow1();
+    showfrnRow2();
+    showfrnRow3();
+    showfrnRow4();
+    showfrnRow5();
 };
 
 // Ouvrir la fenêtre avec le formulaire pour les nouvelles commandes
@@ -205,14 +211,24 @@ function closeModalSettings() {
     document.getElementById("modal_settings").style.display = "none";
 }
 
-// Fonction pour ouvrir la fenêtre pour afficher/masquer les colonnes
+// Fonction pour ouvrir la fenêtre pour afficher/masquer les colonnes dans la table des commandes
 function openModalShow() {
     document.getElementById("modal_show").style.display = "block";
 }
 
-// Fonction pour fermerla fenêtre pour afficher/masquer les colonnes
+// Fonction pour fermer la fenêtre pour afficher/masquer les colonnes dans la table des commandes
 function closeModalShow() {
     document.getElementById("modal_show").style.display = "none";
+}
+
+// Fonction pour ouvrir la fenêtre pour afficher/masquer les colonnes dans la table des fournisseurs
+function openModalShowfrn() {
+    document.getElementById("modal_showfrn").style.display = "block";
+}
+
+// Fonction pour fermer la fenêtre pour afficher/masquer les colonnes dans la table des fournisseurs
+function closeModalShowfrn() {
+    document.getElementById("modal_showfrn").style.display = "none";
 }
 
 // Autorisation des notifications
@@ -834,6 +850,96 @@ function showRow13() {
     });
   } else {
     let columns = document.querySelectorAll(".index13");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}
+
+function showfrnRow0() {
+  let input = document.getElementById("inputfrn0");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".indexfrn0");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".indexfrn0");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}
+
+function showfrnRow1() {
+  let input = document.getElementById("inputfrn1");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".indexfrn1");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".indexfrn1");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}
+
+function showfrnRow2() {
+  let input = document.getElementById("inputfrn2");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".indexfrn2");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".indexfrn2");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}
+
+function showfrnRow3() {
+  let input = document.getElementById("inputfrn3");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".indexfrn3");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".indexfrn3");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}
+
+function showfrnRow4() {
+  let input = document.getElementById("inputfrn4");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".indexfrn4");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".indexfrn4");
+    columns.forEach(function(column) {
+      column.style.display = 'none';
+    });
+  }
+}
+
+function showfrnRow5() {
+  let input = document.getElementById("inputfrn5");
+  if (input.checked) {
+    let columns = document.querySelectorAll(".indexfrn5");
+    columns.forEach(function(column) {
+      column.style.display = '';
+    });
+  } else {
+    let columns = document.querySelectorAll(".indexfrn5");
     columns.forEach(function(column) {
       column.style.display = 'none';
     });
